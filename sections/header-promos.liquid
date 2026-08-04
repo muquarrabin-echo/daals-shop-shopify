@@ -2,6 +2,29 @@
   {% content_for 'blocks' %}
 </div>
 
+{% stylesheet %}
+  .header-promos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 48px;
+    background-color: #2c3e4d;
+    padding: 10px 20px;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .header-promos {
+      gap: 20px;
+      padding: 8px 16px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "header-promos",
@@ -10,15 +33,16 @@
       "type": "_header-promo-item"
     }
   ],
-  "settings": []
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#2c3e4d"
+    }
+  ]
 }
 {% endschema %}
-
-{% stylesheet %}
-    .header-promos{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-    }
-{% endstylesheet %}

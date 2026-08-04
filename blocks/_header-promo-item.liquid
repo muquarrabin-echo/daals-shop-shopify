@@ -1,20 +1,51 @@
 <div class="header-promo-item">
-  <!-- Regular Item Block -->
-  <a class="header-promo-link" href="{{ section.settings.header_promo_link }}">
-    <img
-      class="header-promo-icon"
-      src="{{ section.settings.header_promo_icon }}"
-      alt="{{ section.settings.header_promo_text }}"
-      style="height: 18px;"
-    >
+  <a class="header-promo-link" href="{{ block.settings.header_promo_link }}">
+    {% if block.settings.header_promo_icon %}
+      <img
+        class="header-promo-icon"
+        src="{{ block.settings.header_promo_icon | image_url: width: 60 }}"
+        alt="{{ block.settings.header_promo_text }}"
+        width="20"
+        height="20"
+        loading="lazy"
+      >
+    {% endif %}
 
-    <div class="">
-      <p class="header-promo-text">
-        <span>{{ section.settings.header_promo_text }}</span>
-      </p>
-    </div>
+    <p class="header-promo-text">
+      <span>{{ block.settings.header_promo_text }}</span>
+    </p>
   </a>
 </div>
+
+{% stylesheet %}
+  .header-promo-item {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-promo-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .header-promo-icon {
+    height: 20px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .header-promo-text {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
