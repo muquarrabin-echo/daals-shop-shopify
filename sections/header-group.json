@@ -41,6 +41,17 @@
         "divider_color": "{{ settings.color_palette.color3 }}"
       }
     },
+    "header_promos": {
+      "type": "header-promos",
+      "blocks": {
+        "header_promo_item" : {
+          "type": "_header-promo-item"
+        }
+      },
+      "block_order": ["header_promo_item"],
+      "name": "Header Promos",
+      "settings": {}
+    }, 
     "header_section": {
       "type": "header",
       "blocks": {
@@ -103,6 +114,7 @@
   },
   "order": [
     "header_announcements_9jGBFp",
+    "header_promos",
     "header_section"
   ]
 }

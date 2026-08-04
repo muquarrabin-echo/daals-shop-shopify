@@ -1,0 +1,24 @@
+<div class="header-promos">
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "header-promos",
+  "blocks": [
+    {
+      "type": "_header-promo-item"
+    }
+  ],
+  "settings": []
+}
+{% endschema %}
+
+{% stylesheet %}
+    .header-promos{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+{% endstylesheet %}

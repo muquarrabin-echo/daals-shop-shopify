@@ -1,0 +1,42 @@
+<div class="header-promo-item">
+  <!-- Regular Item Block -->
+  <a class="header-promo-link" href="{{ settings.header_promo_link }}">
+    <img
+      class="header-promo-icon"
+      src="{{ settings.header_promo_icon }}"
+      alt="{{ settings.header_promo_text }}"
+      style="height: 18px;"
+    >
+
+    <div class="">
+      <p class="header-promo-text">
+        <span>{{ settings.header_promo_text }}</span>
+      </p>
+    </div>
+  </a>
+</div>
+
+{% schema %}
+{
+    "name": "Header Promo Item",
+    "settings": [
+        {
+            "type": "text",
+            "id": "header_promo_text",
+            "label": "Header Promo Text",
+            "default": ""
+        },
+        {
+            "type": "url",
+            "id": "header_promo_link",
+            "label": "Header Promo Link",
+            "default": ""
+        },
+        {
+            "type": "image_picker",
+            "id": "header_promo_icon",
+            "label": "Header Promo Icon"
+        }
+    ]
+}
+{% endschema %}
