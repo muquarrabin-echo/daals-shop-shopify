@@ -1,17 +1,11 @@
-<div class="predictive-search-wrapper" 
-data-money-format="{{ shop.money_format | escape }}"
-data-currency="{{ cart.currency.symbol | default: shop.currency }}"
-data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
+<div 
+  class="predictive-search-wrapper" 
+  data-money-format="{{ shop.money_format | escape }}"
+  data-currency="{{ cart.currency.symbol | default: shop.currency }}"
+  data-placeholder="{{ 'product-apparel-1' | placeholder_svg_tag | escape }}"
+>
   <div class="pill-search">
-    <svg
-      class="pill-search__icon"
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-    >
+    <svg class="pill-search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <circle cx="11" cy="11" r="8"></circle>
       <path d="m21 21-4.35-4.35"></path>
     </svg>
@@ -35,7 +29,7 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
     </div>
 
     <div class="psr-right">
-      <div class="psr-products-header">Products</div>
+      <div class="psr-products-header" id="psr-products-header">Products</div>
       <div class="psr-products-grid" id="psr-products"></div>
       <a href="{{ routes.search_url }}" class="psr-view-all" id="psr-view-all">View all products →</a>
     </div>
@@ -75,7 +69,7 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
   .pill-search__input {
     flex: 1;
     border: none;
-    background: transparent !important;
+    background: transparent;
     font-size: 15px;
     outline: none;
     width: 100%;
@@ -95,7 +89,7 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-    display: none; /* hidden by default */
+    display: none;
     grid-template-columns: 240px 1fr;
     overflow: hidden;
     z-index: 100;
@@ -104,6 +98,15 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
 
   .predictive-search-results.is-open {
     display: grid;
+  }
+
+  /* Trending mode → single column */
+  .predictive-search-results.is-trending {
+    grid-template-columns: 1fr;
+  }
+
+  .predictive-search-results.is-trending .psr-left {
+    display: none;
   }
 
   .psr-left {
@@ -118,7 +121,7 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
   }
 
   .psr-section:empty {
-    display: none; /* hide empty sections completely */
+    display: none;
   }
 
   .psr-section + .psr-section {
@@ -148,7 +151,6 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
     text-decoration: underline;
   }
 
-  /* Right side */
   .psr-right {
     padding: 20px;
     display: flex;
@@ -178,13 +180,15 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
     color: inherit;
   }
 
-  .psr-product img {
+  .psr-product img,
+  .psr-product svg {
     width: 70px;
     height: 70px;
     object-fit: cover;
     border-radius: 6px;
-    background: #f5f5f5;
+    background: #f4f4f4;
     flex-shrink: 0;
+    display: block;
   }
 
   .psr-product-info {
@@ -223,28 +227,13 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
     text-decoration: underline;
   }
 
-  .psr-empty {
-    padding: 30px 10px;
-    text-align: center;
-    color: #999;
-    font-size: 14px;
-    grid-column: 1 / -1;
-  }
-
+  .psr-empty,
   .psr-loading {
-    padding: 40px;
+    padding: 40px 10px;
     text-align: center;
     color: #999;
     font-size: 14px;
     grid-column: 1 / -1;
-  }
-  .psr-product svg {
-    width: 70px;
-    height: 70px;
-    border-radius: 6px;
-    flex-shrink: 0;
-    display: block;
-    background-color: #f4f4f4;
   }
 {% endstylesheet %}
 
@@ -257,30 +246,35 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
       this.collectionsEl = document.getElementById('psr-collections');
       this.pagesEl = document.getElementById('psr-pages');
       this.productsEl = document.getElementById('psr-products');
+      this.productsHeader = document.getElementById('psr-products-header');
       this.viewAll = document.getElementById('psr-view-all');
+      this.wrapper = document.querySelector('.predictive-search-wrapper');
 
       if (!this.input || !this.results) return;
 
       this.debounceTimer = null;
 
       this.input.addEventListener('input', () => this.onInput());
-      this.input.addEventListener('focus', () => {
-        if (this.input.value.trim().length > 0) {
-          this.open();
-        }
-      });
+      this.input.addEventListener('focus', () => this.onFocus());
 
-      // Close when clicking outside
       document.addEventListener('click', (e) => {
         if (!e.target.closest('.predictive-search-wrapper')) {
           this.close();
         }
       });
 
-      // Close on Escape
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') this.close();
       });
+    }
+
+    onFocus() {
+      const query = this.input.value.trim();
+      if (query.length === 0) {
+        this.showTrendingProducts();
+      } else {
+        this.open();
+      }
     }
 
     onInput() {
@@ -288,102 +282,59 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
       const query = this.input.value.trim();
 
       if (query.length < 1) {
-        this.close();
+        this.showTrendingProducts();
         return;
       }
 
       this.debounceTimer = setTimeout(() => this.fetchResults(query), 280);
     }
 
-    async fetchResults(query) {
-      // Show loading state
-      this.productsEl.innerHTML = `<div class="psr-loading">Searching…</div>`;
+    // ========== TRENDING PRODUCTS (Single Column) ==========
+    async showTrendingProducts() {
+      this.results.classList.add('is-trending');
+      this.productsHeader.textContent = 'Trending Products';
+      this.viewAll.href = '/collections/all';
+      this.viewAll.textContent = 'View all products →';
+
+      this.suggestionsEl.innerHTML = '';
+      this.collectionsEl.innerHTML = '';
+      this.pagesEl.innerHTML = '';
+
+      this.productsEl.innerHTML = `<div class="psr-loading">Loading…</div>`;
       this.open();
 
-      // Safer URL construction
-      const root =
-        window.Shopify && window.Shopify.routes && window.Shopify.routes.root ? window.Shopify.routes.root : '/';
-
-      const url = `${root}search/suggest.json?q=${encodeURIComponent(
-        query
-      )}&resources[type]=product,collection,page,article,query&resources[limit]=8&resources[limit_scope]=each&resources[options][unavailable_products]=last`;
-
       try {
-        const res = await fetch(url);
+        // Change "trending" to your collection handle if needed
+        let res = await fetch('/collections/trending/products.json?limit=8');
+        let data = await res.json();
 
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`);
+        if (!data.products || data.products.length === 0) {
+          res = await fetch('/collections/all/products.json?limit=8');
+          data = await res.json();
         }
-
-        const data = await res.json();
-
-        this.render(data.resources?.results || {}, query);
+        this.renderTrending(data.products || []);
       } catch (err) {
-        this.productsEl.innerHTML = `<div class="psr-empty">Something went wrong. Try again.</div>`;
+        this.productsEl.innerHTML = `<div class="psr-empty">No trending products</div>`;
       }
     }
 
-    render(results, query) {
-      // ===== Left column =====
-      // Query suggestions
-      if (results.queries && results.queries.length) {
-        this.suggestionsEl.innerHTML = `
-          <h4>Popular suggestions</h4>
-          ${results.queries
-            .map(
-              (q) => `
-            <a href="${q.url}">${q.styled_text || q.text}</a>
-          `
-            )
-            .join('')}
-        `;
-      } else {
-        this.suggestionsEl.innerHTML = '';
-      }
+    renderTrending(products) {
+        const placeholder = this.wrapper?.dataset.placeholder || '';
 
-      // Collections
-      if (results.collections && results.collections.length) {
-        this.collectionsEl.innerHTML = `
-          <h4>Collections</h4>
-          ${results.collections
-            .map(
-              (c) => `
-            <a href="${c.url}">${c.title}</a>
-          `
-            )
-            .join('')}
-        `;
-      } else {
-        this.collectionsEl.innerHTML = '';
-      }
+        if (!products.length) {
+            this.productsEl.innerHTML = `<div class="psr-empty">No trending products</div>`;
+            return;
+        }
 
-      // Pages + Articles
-      const pagesAndArticles = [...(results.pages || []), ...(results.articles || [])];
+        this.productsEl.innerHTML = products.map(p => {
+            const img = p.featured_image || (p.images && p.images[0] && p.images[0].src) || null;
 
-      if (pagesAndArticles.length) {
-        this.pagesEl.innerHTML = `
-          <h4>Blog & Pages</h4>
-          ${pagesAndArticles
-            .map(
-              (p) => `
-            <a href="${p.url}">${p.title}</a>
-          `
-            )
-            .join('')}
-        `;
-      } else {
-        this.pagesEl.innerHTML = '';
-      }
-
-     // ===== Right column - Products =====
-    if (results.products && results.products.length) {
-        const placeholder = document.querySelector('.predictive-search-wrapper')?.dataset.placeholder || '';
-        this.productsEl.innerHTML = results.products.map(p => {
-            const img = p.featured_image?.url || p.image || null;
-            const price = this.formatMoney(p.price);
+            // Correct way to get price from collections/products.json
+            const rawPrice = p.variants && p.variants[0] ? p.variants[0].price : p.price;
+            const price = this.formatMoney(rawPrice, true);
 
             return `
-            <a href="${p.url}" class="psr-product">
+            <a href="/products/${p.handle}" class="psr-product">
                 ${img 
                 ? `<img src="${img}" alt="${p.title}" loading="lazy" width="70" height="70">`
                 : placeholder
@@ -395,33 +346,105 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
             </a>
             `;
         }).join('');
-        
-    } else {
-        this.productsEl.innerHTML = `<div class="psr-empty">No products found</div>`;
     }
 
-      // View all link
-      this.viewAll.href = `${window.Shopify?.routes?.root || '/'}search?q=${encodeURIComponent(query)}`;
-      this.viewAll.textContent = `View all results →`;
-
+    // ========== SEARCH RESULTS (Two Columns) ==========
+    async fetchResults(query) {
+      this.results.classList.remove('is-trending');
+      this.productsHeader.textContent = 'Products';
+      this.productsEl.innerHTML = `<div class="psr-loading">Searching…</div>`;
       this.open();
+
+      const root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+      const url = `${root}search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product,collection,page,article,query&resources[limit]=8&resources[limit_scope]=each&resources[options][unavailable_products]=last`;
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        this.render(data.resources?.results || {}, query);
+      } catch (err) {
+        this.productsEl.innerHTML = `<div class="psr-empty">Something went wrong</div>`;
+      }
     }
 
-    formatMoney(cents) {
-        if (typeof cents === 'undefined' || cents === null) return '';
+    render(results, query) {
+      // Left column - Suggestions
+      if (results.queries && results.queries.length) {
+        this.suggestionsEl.innerHTML = `
+          <h4>Popular suggestions</h4>
+          ${results.queries.map(q => `<a href="${q.url}">${q.styled_text || q.text}</a>`).join('')}
+        `;
+      } else {
+        this.suggestionsEl.innerHTML = '';
+      }
 
-        const wrapper = document.querySelector('.predictive-search-wrapper');
-        const moneyFormat = wrapper?.dataset.moneyFormat || '${{amount}}';
-        const currencySymbol = wrapper?.dataset.currency || '';
+      // Collections
+      if (results.collections && results.collections.length) {
+        this.collectionsEl.innerHTML = `
+          <h4>Collections</h4>
+          ${results.collections.map(c => `<a href="${c.url}">${c.title}</a>`).join('')}
+        `;
+      } else {
+        this.collectionsEl.innerHTML = '';
+      }
 
-        // Prefer Shopify's native formatter
+      // Pages + Articles
+      const pagesAndArticles = [...(results.pages || []), ...(results.articles || [])];
+      if (pagesAndArticles.length) {
+        this.pagesEl.innerHTML = `
+          <h4>Blog & Pages</h4>
+          ${pagesAndArticles.map(p => `<a href="${p.url}">${p.title}</a>`).join('')}
+        `;
+      } else {
+        this.pagesEl.innerHTML = '';
+      }
+
+      // Products
+      const placeholder = this.wrapper?.dataset.placeholder || '';
+
+      if (results.products && results.products.length) {
+        this.productsEl.innerHTML = results.products.map(p => {
+          const img = p.featured_image?.url || p.image || null;
+          const price = this.formatMoney(p.price); // cents
+
+          return `
+            <a href="${p.url}" class="psr-product">
+              ${img 
+                ? `<img src="${img}" alt="${p.title}" loading="lazy" width="70" height="70">`
+                : placeholder
+              }
+              <div class="psr-product-info">
+                <div class="psr-product-title">${p.title}</div>
+                <div class="psr-product-price">${price}</div>
+              </div>
+            </a>
+          `;
+        }).join('');
+      } else {
+        this.productsEl.innerHTML = `<div class="psr-empty">No products found</div>`;
+      }
+
+      this.viewAll.href = `${(window.Shopify?.routes?.root || '/')}search?q=${encodeURIComponent(query)}`;
+      this.viewAll.textContent = `View all results →`;
+    }
+
+    formatMoney(cents, isAlreadyFormatted = false) {
+        if (typeof cents === 'undefined' || cents === null || cents === '') return '';
+
+        const moneyFormat = this.wrapper?.dataset.moneyFormat || '${{amount}}';
+        const currencySymbol = this.wrapper?.dataset.currency || '';
+
+        if (isAlreadyFormatted) {
+            const amount = parseFloat(cents).toFixed(2);
+            return currencySymbol + amount;
+        }
+
         if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
             return Shopify.formatMoney(cents, moneyFormat);
         }
 
-        // Fallback with currency symbol
-        const amount = (Number(cents) / 100).toFixed(2);
-        return currencySymbol + amount;
+        return currencySymbol + (Number(cents) / 100).toFixed(2);
     }
 
     open() {
@@ -430,12 +453,11 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
     }
 
     close() {
-      this.results.classList.remove('is-open');
+      this.results.classList.remove('is-open', 'is-trending');
       this.input.setAttribute('aria-expanded', 'false');
     }
   }
 
-  // Support both normal pages and section reloads
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => new PredictiveSearch());
   } else {
