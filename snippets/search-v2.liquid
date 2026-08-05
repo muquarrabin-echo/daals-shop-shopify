@@ -1,24 +1,14 @@
-<div 
-  class="predictive-search-wrapper" 
-  data-money-format="{{ shop.money_format | escape }}"
+<div class="predictive-search-wrapper" data-money-format="{{ shop.money_format | escape }}"
   data-currency="{{ cart.currency.symbol | default: shop.currency }}"
-  data-placeholder="{{ 'product-apparel-1' | placeholder_svg_tag | escape }}"
->
+  data-placeholder="{{ 'product-apparel-1' | placeholder_svg_tag | escape }}">
   <div class="pill-search">
-    <svg class="pill-search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <svg class="pill-search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2">
       <circle cx="11" cy="11" r="8"></circle>
       <path d="m21 21-4.35-4.35"></path>
     </svg>
-    <input
-      type="search"
-      class="pill-search__input"
-      placeholder="What are you looking for?"
-      id="predictive-search-input"
-      autocomplete="off"
-      role="combobox"
-      aria-expanded="false"
-      aria-controls="predictive-search-results"
-    >
+    <input type="search" class="pill-search__input" placeholder="What are you looking for?" id="predictive-search-input"
+      autocomplete="off" role="combobox" aria-expanded="false" aria-controls="predictive-search-results">
   </div>
 
   <div class="predictive-search-results" id="predictive-search-results">
@@ -37,430 +27,491 @@
 </div>
 
 {% stylesheet %}
-  .predictive-search-wrapper {
-    position: relative;
-    max-width: 480px;
-    z-index: 50;
-  }
+.predictive-search-wrapper {
+position: relative;
+max-width: 480px;
+z-index: 50;
+}
 
-  /* ===== PILL INPUT ===== */
-  .pill-search {
-    display: flex;
-    align-items: center;
-    background: #f5f5f5;
-    border-radius: 9999px;
-    padding: 11px 18px;
-    transition: all 0.2s ease;
-    border: 1px solid transparent;
-  }
+/* ===== PILL INPUT ===== */
 
-  .pill-search:focus-within {
-    background: #fff;
-    border-color: #ddd;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  }
+.pill-search {
+display: flex;
+align-items: center;
+background: #f5f5f5;
+border-radius: 9999px;
+padding: 11px 18px;
+transition: all 0.25s ease;
+border: 1px solid transparent;
+}
 
-  .pill-search__icon {
-    flex-shrink: 0;
-    color: #666;
-    margin-right: 12px;
-  }
+/* Transparent header state */
+.header[transparent] .pill-search,
+header-component[transparent] .pill-search {
+background: transparent;
+border-color: rgba(255, 255, 255, 0.3);
+}
 
-  .pill-search__input {
-    flex: 1;
-    border: none;
-    background: transparent !important;
-    font-size: 15px;
-    outline: none;
-    width: 100%;
-  }
+.header[transparent] .pill-search__icon,
+header-component[transparent] .pill-search__icon {
+color: currentColor;
+}
 
-  .pill-search__input::-webkit-search-cancel-button {
-    -webkit-appearance: none;
-  }
+.header[transparent] .pill-search__input,
+header-component[transparent] .pill-search__input {
+color: currentColor;
+}
 
-  /* ===== DROPDOWN ===== */
-  .predictive-search-results {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    width: 720px;
-    max-width: 95vw;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-    display: none;
-    grid-template-columns: 240px 1fr;
-    overflow: hidden;
-    z-index: 100;
-    max-height: 520px;
-  }
+.header[transparent] .pill-search__input::placeholder,
+header-component[transparent] .pill-search__input::placeholder {
+color: currentColor;
+opacity: 0.7;
+}
 
-  .predictive-search-results.is-open {
-    display: grid;
-  }
+/* Pill hover / focus */
+.pill-search:hover,
+.pill-search:focus-within {
+background: #fff !important;
+border-color: #ddd;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
 
-  /* Trending mode → single column */
-  .predictive-search-results.is-trending {
-    grid-template-columns: 1fr;
-  }
+.pill-search:hover .pill-search__icon,
+.pill-search:focus-within .pill-search__icon {
+color: #666 !important;
+}
 
-  .predictive-search-results.is-trending .psr-left {
-    display: none;
-  }
+.pill-search:hover .pill-search__input,
+.pill-search:focus-within .pill-search__input {
+color: #111 !important;
+}
 
-  .psr-left {
-    background: #fafafa;
-    border-right: 1px solid #eee;
-    padding: 20px 0;
-    overflow-y: auto;
-  }
+.pill-search:hover .pill-search__input::placeholder,
+.pill-search:focus-within .pill-search__input::placeholder {
+color: #999 !important;
+opacity: 1;
+}
 
-  .psr-section {
-    padding: 0 20px 16px;
-  }
+/* Make the whole header opaque when hovering the search pill */
+.header[transparent]:has(.pill-search:hover),
+.header[transparent]:has(.pill-search:focus-within),
+header-component[transparent]:has(.pill-search:hover),
+header-component[transparent]:has(.pill-search:focus-within) {
+--header-bg-color: var(--color-background);
+--header-logo-display: unset;
+--header-logo-inverse-display: unset;
+background-color: var(--color-background);
+}
 
-  .psr-section:empty {
-    display: none;
-  }
+.header[transparent]:has(.pill-search:hover) .header__row,
+.header[transparent]:has(.pill-search:focus-within) .header__row,
+header-component[transparent]:has(.pill-search:hover) .header__row,
+header-component[transparent]:has(.pill-search:focus-within) .header__row {
+--color-foreground: inherit;
+--color-foreground-rgb: inherit;
+--color-background: inherit;
+--color-background-rgb: inherit;
+--color-border: inherit;
+}
 
-  .psr-section + .psr-section {
-    border-top: 1px solid #eee;
-    padding-top: 16px;
-  }
+.pill-search__icon {
+flex-shrink: 0;
+color: #666;
+margin-right: 12px;
+}
 
-  .psr-section h4 {
-    font-size: 12px;
-    font-weight: 600;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0 0 10px;
-  }
+.pill-search__input {
+flex: 1;
+border: none;
+background: transparent !important;
+font-size: 15px;
+outline: none;
+width: 100%;
+}
 
-  .psr-section a {
-    display: block;
-    padding: 6px 0;
-    color: #222;
-    text-decoration: none;
-    font-size: 14px;
-  }
+.pill-search__input::-webkit-search-cancel-button {
+-webkit-appearance: none;
+}
 
-  .psr-section a:hover {
-    color: #000;
-    text-decoration: underline;
-  }
+/* ===== DROPDOWN ===== */
+.predictive-search-results {
+position: absolute;
+top: calc(100% + 8px);
+left: 0;
+width: 720px;
+max-width: 95vw;
+background: #fff;
+border-radius: 12px;
+box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+display: none;
+grid-template-columns: 240px 1fr;
+overflow: hidden;
+z-index: 100;
+max-height: 520px;
+}
 
-  .psr-right {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-  }
+.predictive-search-results.is-open {
+display: grid;
+}
 
-  .psr-products-header {
-    font-size: 13px;
-    font-weight: 600;
-    color: #888;
-    margin-bottom: 14px;
-  }
+/* Trending mode → single column */
+.predictive-search-results.is-trending {
+grid-template-columns: 1fr;
+}
 
-  .psr-products-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    flex: 1;
-    overflow-y: auto;
-    min-height: 80px;
-  }
+.predictive-search-results.is-trending .psr-left {
+display: none;
+}
 
-  .psr-product {
-    display: flex;
-    gap: 12px;
-    text-decoration: none;
-    color: inherit;
-  }
+.psr-left {
+background: #fafafa;
+border-right: 1px solid #eee;
+padding: 20px 0;
+overflow-y: auto;
+}
 
-  .psr-product img,
-  .psr-product svg {
-    width: 70px;
-    height: 70px;
-    object-fit: cover;
-    border-radius: 6px;
-    background: #f4f4f4;
-    flex-shrink: 0;
-    display: block;
-  }
+.psr-section {
+padding: 0 20px 16px;
+}
 
-  .psr-product-info {
-    flex: 1;
-    min-width: 0;
-  }
+.psr-section:empty {
+display: none;
+}
 
-  .psr-product-title {
-    font-size: 13px;
-    line-height: 1.35;
-    margin-bottom: 4px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+.psr-section + .psr-section {
+border-top: 1px solid #eee;
+padding-top: 16px;
+}
 
-  .psr-product-price {
-    font-size: 13px;
-    font-weight: 600;
-  }
+.psr-section h4 {
+font-size: 12px;
+font-weight: 600;
+color: #888;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+margin: 0 0 10px;
+}
 
-  .psr-view-all {
-    display: block;
-    text-align: center;
-    margin-top: 16px;
-    padding-top: 14px;
-    border-top: 1px solid #eee;
-    font-size: 14px;
-    color: #222;
-    text-decoration: none;
-    font-weight: 500;
-  }
+.psr-section a {
+display: block;
+padding: 6px 0;
+color: #222;
+text-decoration: none;
+font-size: 14px;
+}
 
-  .psr-view-all:hover {
-    text-decoration: underline;
-  }
+.psr-section a:hover {
+color: #000;
+text-decoration: underline;
+}
 
-  .psr-empty,
-  .psr-loading {
-    padding: 40px 10px;
-    text-align: center;
-    color: #999;
-    font-size: 14px;
-    grid-column: 1 / -1;
-  }
+.psr-right {
+padding: 20px;
+display: flex;
+flex-direction: column;
+}
+
+.psr-products-header {
+font-size: 13px;
+font-weight: 600;
+color: #888;
+margin-bottom: 14px;
+}
+
+.psr-products-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 16px;
+flex: 1;
+overflow-y: auto;
+min-height: 80px;
+}
+
+.psr-product {
+display: flex;
+gap: 12px;
+text-decoration: none;
+color: inherit;
+}
+
+.psr-product img,
+.psr-product svg {
+width: 70px;
+height: 70px;
+object-fit: cover;
+border-radius: 6px;
+background: #f4f4f4;
+flex-shrink: 0;
+display: block;
+}
+
+.psr-product-info {
+flex: 1;
+min-width: 0;
+}
+
+.psr-product-title {
+font-size: 13px;
+line-height: 1.35;
+margin-bottom: 4px;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+}
+
+.psr-product-price {
+font-size: 13px;
+font-weight: 600;
+}
+
+.psr-view-all {
+display: block;
+text-align: center;
+margin-top: 16px;
+padding-top: 14px;
+border-top: 1px solid #eee;
+font-size: 14px;
+color: #222;
+text-decoration: none;
+font-weight: 500;
+}
+
+.psr-view-all:hover {
+text-decoration: underline;
+}
+
+.psr-empty,
+.psr-loading {
+padding: 40px 10px;
+text-align: center;
+color: #999;
+font-size: 14px;
+grid-column: 1 / -1;
+}
 {% endstylesheet %}
 
 {% javascript %}
-  class PredictiveSearch {
-    constructor() {
-      this.input = document.getElementById('predictive-search-input');
-      this.results = document.getElementById('predictive-search-results');
-      this.suggestionsEl = document.getElementById('psr-suggestions');
-      this.collectionsEl = document.getElementById('psr-collections');
-      this.pagesEl = document.getElementById('psr-pages');
-      this.productsEl = document.getElementById('psr-products');
-      this.productsHeader = document.getElementById('psr-products-header');
-      this.viewAll = document.getElementById('psr-view-all');
-      this.wrapper = document.querySelector('.predictive-search-wrapper');
+class PredictiveSearch {
+constructor() {
+this.input = document.getElementById('predictive-search-input');
+this.results = document.getElementById('predictive-search-results');
+this.suggestionsEl = document.getElementById('psr-suggestions');
+this.collectionsEl = document.getElementById('psr-collections');
+this.pagesEl = document.getElementById('psr-pages');
+this.productsEl = document.getElementById('psr-products');
+this.productsHeader = document.getElementById('psr-products-header');
+this.viewAll = document.getElementById('psr-view-all');
+this.wrapper = document.querySelector('.predictive-search-wrapper');
 
-      if (!this.input || !this.results) return;
+if (!this.input || !this.results) return;
 
-      this.debounceTimer = null;
+this.debounceTimer = null;
 
-      this.input.addEventListener('input', () => this.onInput());
-      this.input.addEventListener('focus', () => this.onFocus());
+this.input.addEventListener('input', () => this.onInput());
+this.input.addEventListener('focus', () => this.onFocus());
 
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('.predictive-search-wrapper')) {
-          this.close();
-        }
-      });
+document.addEventListener('click', (e) => {
+if (!e.target.closest('.predictive-search-wrapper')) {
+this.close();
+}
+});
 
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') this.close();
-      });
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape') this.close();
+});
+}
+
+onFocus() {
+const query = this.input.value.trim();
+if (query.length === 0) {
+this.showTrendingProducts();
+} else {
+this.open();
+}
+}
+
+onInput() {
+clearTimeout(this.debounceTimer);
+const query = this.input.value.trim();
+
+if (query.length < 1) { this.showTrendingProducts(); return; } this.debounceTimer=setTimeout(()=>
+  this.fetchResults(query), 280);
+  }
+
+  // ========== TRENDING PRODUCTS (Single Column) ==========
+  async showTrendingProducts() {
+  this.results.classList.add('is-trending');
+  this.productsHeader.textContent = 'Trending Products';
+  this.viewAll.href = '/collections/all';
+  this.viewAll.textContent = 'View all products →';
+
+  this.suggestionsEl.innerHTML = '';
+  this.collectionsEl.innerHTML = '';
+  this.pagesEl.innerHTML = '';
+
+  this.productsEl.innerHTML = `<div class="psr-loading">Loading…</div>`;
+  this.open();
+
+  try {
+  // Change "trending" to your collection handle if needed
+  let res = await fetch('/collections/trending/products.json?limit=8');
+  let data = await res.json();
+
+  if (!data.products || data.products.length === 0) {
+  res = await fetch('/collections/all/products.json?limit=8');
+  data = await res.json();
+  }
+  this.renderTrending(data.products || []);
+  } catch (err) {
+  this.productsEl.innerHTML = `<div class="psr-empty">No trending products</div>`;
+  }
+  }
+
+  renderTrending(products) {
+  const placeholder = this.wrapper?.dataset.placeholder || '';
+
+  if (!products.length) {
+  this.productsEl.innerHTML = `<div class="psr-empty">No trending products</div>`;
+  return;
+  }
+
+  this.productsEl.innerHTML = products.map(p => {
+  const img = p.featured_image || (p.images && p.images[0] && p.images[0].src) || null;
+
+  // Correct way to get price from collections/products.json
+  const rawPrice = p.variants && p.variants[0] ? p.variants[0].price : p.price;
+  const price = this.formatMoney(rawPrice, true);
+
+  return `
+  <a href="/products/${p.handle}" class="psr-product">
+    ${img
+    ? `<img src="${img}" alt="${p.title}" loading="lazy" width="70" height="70">`
+    : placeholder
     }
+    <div class="psr-product-info">
+      <div class="psr-product-title">${p.title}</div>
+      <div class="psr-product-price">${price}</div>
+    </div>
+  </a>
+  `;
+  }).join('');
+  }
 
-    onFocus() {
-      const query = this.input.value.trim();
-      if (query.length === 0) {
-        this.showTrendingProducts();
-      } else {
-        this.open();
-      }
+  // ========== SEARCH RESULTS (Two Columns) ==========
+  async fetchResults(query) {
+  this.results.classList.remove('is-trending');
+  this.productsHeader.textContent = 'Products';
+  this.productsEl.innerHTML = `<div class="psr-loading">Searching…</div>`;
+  this.open();
+
+  const root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+  const url =
+  `${root}search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product,collection,page,article,query&resources[limit]=8&resources[limit_scope]=each&resources[options][unavailable_products]=last`;
+
+  try {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  this.render(data.resources?.results || {}, query);
+  } catch (err) {
+  this.productsEl.innerHTML = `<div class="psr-empty">Something went wrong</div>`;
+  }
+  }
+
+  render(results, query) {
+  // Left column - Suggestions
+  if (results.queries && results.queries.length) {
+  this.suggestionsEl.innerHTML = `
+  <h4>Popular suggestions</h4>
+  ${results.queries.map(q => `<a href="${q.url}">${q.styled_text || q.text}</a>`).join('')}
+  `;
+  } else {
+  this.suggestionsEl.innerHTML = '';
+  }
+
+  // Collections
+  if (results.collections && results.collections.length) {
+  this.collectionsEl.innerHTML = `
+  <h4>Collections</h4>
+  ${results.collections.map(c => `<a href="${c.url}">${c.title}</a>`).join('')}
+  `;
+  } else {
+  this.collectionsEl.innerHTML = '';
+  }
+
+  // Pages + Articles
+  const pagesAndArticles = [...(results.pages || []), ...(results.articles || [])];
+  if (pagesAndArticles.length) {
+  this.pagesEl.innerHTML = `
+  <h4>Blog & Pages</h4>
+  ${pagesAndArticles.map(p => `<a href="${p.url}">${p.title}</a>`).join('')}
+  `;
+  } else {
+  this.pagesEl.innerHTML = '';
+  }
+
+  // Products
+  const placeholder = this.wrapper?.dataset.placeholder || '';
+
+  if (results.products && results.products.length) {
+  this.productsEl.innerHTML = results.products.map(p => {
+  const img = p.featured_image?.url || p.image || null;
+  const price = this.formatMoney(p.price); // cents
+
+  return `
+  <a href="${p.url}" class="psr-product">
+    ${img
+    ? `<img src="${img}" alt="${p.title}" loading="lazy" width="70" height="70">`
+    : placeholder
     }
+    <div class="psr-product-info">
+      <div class="psr-product-title">${p.title}</div>
+      <div class="psr-product-price">${price}</div>
+    </div>
+  </a>
+  `;
+  }).join('');
+  } else {
+  this.productsEl.innerHTML = `<div class="psr-empty">No products found</div>`;
+  }
 
-    onInput() {
-      clearTimeout(this.debounceTimer);
-      const query = this.input.value.trim();
+  this.viewAll.href = `${(window.Shopify?.routes?.root || '/')}search?q=${encodeURIComponent(query)}`;
+  this.viewAll.textContent = `View all results →`;
+  }
 
-      if (query.length < 1) {
-        this.showTrendingProducts();
-        return;
-      }
+  formatMoney(cents, isAlreadyFormatted = false) {
+  if (typeof cents === 'undefined' || cents === null || cents === '') return '';
 
-      this.debounceTimer = setTimeout(() => this.fetchResults(query), 280);
-    }
+  const moneyFormat = this.wrapper?.dataset.moneyFormat || '${{amount}}';
+  const currencySymbol = this.wrapper?.dataset.currency || '';
 
-    // ========== TRENDING PRODUCTS (Single Column) ==========
-    async showTrendingProducts() {
-      this.results.classList.add('is-trending');
-      this.productsHeader.textContent = 'Trending Products';
-      this.viewAll.href = '/collections/all';
-      this.viewAll.textContent = 'View all products →';
+  if (isAlreadyFormatted) {
+  const amount = parseFloat(cents).toFixed(2);
+  return currencySymbol + amount;
+  }
 
-      this.suggestionsEl.innerHTML = '';
-      this.collectionsEl.innerHTML = '';
-      this.pagesEl.innerHTML = '';
+  if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
+  return Shopify.formatMoney(cents, moneyFormat);
+  }
 
-      this.productsEl.innerHTML = `<div class="psr-loading">Loading…</div>`;
-      this.open();
+  return currencySymbol + (Number(cents) / 100).toFixed(2);
+  }
 
-      try {
-        // Change "trending" to your collection handle if needed
-        let res = await fetch('/collections/trending/products.json?limit=8');
-        let data = await res.json();
+  open() {
+  this.results.classList.add('is-open');
+  this.input.setAttribute('aria-expanded', 'true');
+  }
 
-        if (!data.products || data.products.length === 0) {
-          res = await fetch('/collections/all/products.json?limit=8');
-          data = await res.json();
-        }
-        this.renderTrending(data.products || []);
-      } catch (err) {
-        this.productsEl.innerHTML = `<div class="psr-empty">No trending products</div>`;
-      }
-    }
-
-    renderTrending(products) {
-        const placeholder = this.wrapper?.dataset.placeholder || '';
-
-        if (!products.length) {
-            this.productsEl.innerHTML = `<div class="psr-empty">No trending products</div>`;
-            return;
-        }
-
-        this.productsEl.innerHTML = products.map(p => {
-            const img = p.featured_image || (p.images && p.images[0] && p.images[0].src) || null;
-
-            // Correct way to get price from collections/products.json
-            const rawPrice = p.variants && p.variants[0] ? p.variants[0].price : p.price;
-            const price = this.formatMoney(rawPrice, true);
-
-            return `
-            <a href="/products/${p.handle}" class="psr-product">
-                ${img 
-                ? `<img src="${img}" alt="${p.title}" loading="lazy" width="70" height="70">`
-                : placeholder
-                }
-                <div class="psr-product-info">
-                <div class="psr-product-title">${p.title}</div>
-                <div class="psr-product-price">${price}</div>
-                </div>
-            </a>
-            `;
-        }).join('');
-    }
-
-    // ========== SEARCH RESULTS (Two Columns) ==========
-    async fetchResults(query) {
-      this.results.classList.remove('is-trending');
-      this.productsHeader.textContent = 'Products';
-      this.productsEl.innerHTML = `<div class="psr-loading">Searching…</div>`;
-      this.open();
-
-      const root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
-      const url = `${root}search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product,collection,page,article,query&resources[limit]=8&resources[limit_scope]=each&resources[options][unavailable_products]=last`;
-
-      try {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        this.render(data.resources?.results || {}, query);
-      } catch (err) {
-        this.productsEl.innerHTML = `<div class="psr-empty">Something went wrong</div>`;
-      }
-    }
-
-    render(results, query) {
-      // Left column - Suggestions
-      if (results.queries && results.queries.length) {
-        this.suggestionsEl.innerHTML = `
-          <h4>Popular suggestions</h4>
-          ${results.queries.map(q => `<a href="${q.url}">${q.styled_text || q.text}</a>`).join('')}
-        `;
-      } else {
-        this.suggestionsEl.innerHTML = '';
-      }
-
-      // Collections
-      if (results.collections && results.collections.length) {
-        this.collectionsEl.innerHTML = `
-          <h4>Collections</h4>
-          ${results.collections.map(c => `<a href="${c.url}">${c.title}</a>`).join('')}
-        `;
-      } else {
-        this.collectionsEl.innerHTML = '';
-      }
-
-      // Pages + Articles
-      const pagesAndArticles = [...(results.pages || []), ...(results.articles || [])];
-      if (pagesAndArticles.length) {
-        this.pagesEl.innerHTML = `
-          <h4>Blog & Pages</h4>
-          ${pagesAndArticles.map(p => `<a href="${p.url}">${p.title}</a>`).join('')}
-        `;
-      } else {
-        this.pagesEl.innerHTML = '';
-      }
-
-      // Products
-      const placeholder = this.wrapper?.dataset.placeholder || '';
-
-      if (results.products && results.products.length) {
-        this.productsEl.innerHTML = results.products.map(p => {
-          const img = p.featured_image?.url || p.image || null;
-          const price = this.formatMoney(p.price); // cents
-
-          return `
-            <a href="${p.url}" class="psr-product">
-              ${img 
-                ? `<img src="${img}" alt="${p.title}" loading="lazy" width="70" height="70">`
-                : placeholder
-              }
-              <div class="psr-product-info">
-                <div class="psr-product-title">${p.title}</div>
-                <div class="psr-product-price">${price}</div>
-              </div>
-            </a>
-          `;
-        }).join('');
-      } else {
-        this.productsEl.innerHTML = `<div class="psr-empty">No products found</div>`;
-      }
-
-      this.viewAll.href = `${(window.Shopify?.routes?.root || '/')}search?q=${encodeURIComponent(query)}`;
-      this.viewAll.textContent = `View all results →`;
-    }
-
-    formatMoney(cents, isAlreadyFormatted = false) {
-        if (typeof cents === 'undefined' || cents === null || cents === '') return '';
-
-        const moneyFormat = this.wrapper?.dataset.moneyFormat || '${{amount}}';
-        const currencySymbol = this.wrapper?.dataset.currency || '';
-
-        if (isAlreadyFormatted) {
-            const amount = parseFloat(cents).toFixed(2);
-            return currencySymbol + amount;
-        }
-
-        if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
-            return Shopify.formatMoney(cents, moneyFormat);
-        }
-
-        return currencySymbol + (Number(cents) / 100).toFixed(2);
-    }
-
-    open() {
-      this.results.classList.add('is-open');
-      this.input.setAttribute('aria-expanded', 'true');
-    }
-
-    close() {
-      this.results.classList.remove('is-open', 'is-trending');
-      this.input.setAttribute('aria-expanded', 'false');
-    }
+  close() {
+  this.results.classList.remove('is-open', 'is-trending');
+  this.input.setAttribute('aria-expanded', 'false');
+  }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => new PredictiveSearch());
+  document.addEventListener('DOMContentLoaded', () => new PredictiveSearch());
   } else {
-    new PredictiveSearch();
+  new PredictiveSearch();
   }
-{% endjavascript %}
+  {% endjavascript %}
