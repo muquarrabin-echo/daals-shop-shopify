@@ -316,11 +316,9 @@ data-placeholder="{{ 'image' | placeholder_svg_tag | escape }}">
         }
 
         const data = await res.json();
-        console.log('Predictive search response:', data); // keep this for debugging
 
         this.render(data.resources?.results || {}, query);
       } catch (err) {
-        console.error('Predictive search error:', err);
         this.productsEl.innerHTML = `<div class="psr-empty">Something went wrong. Try again.</div>`;
       }
     }
