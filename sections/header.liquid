@@ -128,7 +128,9 @@
   endif
   capture search
     #render 'search', style: search_style, class: search_class, display_style: section.settings.actions_display_style
-    render 'search-v2'
+    #render 'search-v2'
+    render 'search-v2', id_suffix: 'top', class: search_class
+
   endcapture
 
   # Skip drawer search under specific conditions:
@@ -143,6 +145,7 @@
     # Mobile search duplicate for when search is not in the right order for mobile layout
     capture drawer_search
       #render 'search', class: 'search-action--hidden-on-menu', style: search_style, display_style: section.settings.actions_display_style
+      render 'search-v2', id_suffix: 'drawer', class: 'search-action--hidden-on-menu predictive-search-wrapper--drawer'
     endcapture
   endif
 
