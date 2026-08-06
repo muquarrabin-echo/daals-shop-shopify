@@ -1,3 +1,6 @@
+/* =====================================================================
+   PREDICTIVE SEARCH BASE & WRAPPER
+   ===================================================================== */
 predictive-search,
 .predictive-search-wrapper {
   display: block;
@@ -42,25 +45,29 @@ predictive-search,
   display: flex;
 }
 
-/* ===== PILL INPUT DEFAULT (NON-TRANSPARENT HEADER) ===== */
+/* =====================================================================
+   1. DEFAULT / RESTING BASE (Solid White Header Mode)
+   ===================================================================== */
 .pill-search {
   position: relative;
   display: flex;
   align-items: center;
-  background: #f5f5f5;
+  background: #ffffff !important;
   border-radius: 9999px;
   padding: 11px 18px;
   transition: all 0.25s ease;
-  border: 1px solid transparent;
+  border: 1px solid #dcdcdc !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
   z-index: 10;
   pointer-events: auto;
 }
 
 .pill-search__icon {
   flex-shrink: 0;
-  color: #666;
+  color: #555555 !important;
   margin-right: 12px;
   pointer-events: none;
+  transition: color 0.2s ease;
 }
 
 .pill-search__input {
@@ -68,84 +75,106 @@ predictive-search,
   border: none;
   background: transparent !important;
   font-size: 15px;
+  color: #111111 !important;
   outline: none;
   width: 100%;
   pointer-events: auto;
   cursor: text;
 }
 
+.pill-search__input::placeholder {
+  color: #888888 !important;
+  opacity: 1 !important;
+}
+
 .pill-search__input::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
 
-/* ===== TRANSPARENT HEADER OVERRIDES ===== */
-.header-wrapper--transparent .pill-search,
-.header--transparent .pill-search,
-.header[transparent] .pill-search,
-header-component[transparent] .pill-search,
-.shopify-section-header-sticky:not(.scrolled-past-header) .pill-search {
+/* =====================================================================
+   2. TRANSPARENT HEADER ON (RESTING STATE ONLY)
+   Applies ONLY when NOT scrolled (data-sticky-state is NOT active)
+   ===================================================================== */
+:is(.header-wrapper--transparent, [transparent]):not([data-sticky-state="active"]):not(:hover):not(:focus-within):not(:has(.predictive-search-results.is-open)) .pill-search {
   background: rgba(255, 255, 255, 0.18) !important;
-  border-color: rgba(255, 255, 255, 0.35) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
   box-shadow: none !important;
 }
 
-.header-wrapper--transparent .pill-search__icon,
-.header--transparent .pill-search__icon,
-.header[transparent] .pill-search__icon,
-header-component[transparent] .pill-search__icon,
-.shopify-section-header-sticky:not(.scrolled-past-header) .pill-search__icon {
+:is(.header-wrapper--transparent, [transparent]):not([data-sticky-state="active"]):not(:hover):not(:focus-within):not(:has(.predictive-search-results.is-open)) .pill-search__icon {
   color: #ffffff !important;
 }
 
-.header-wrapper--transparent .pill-search__input,
-.header--transparent .pill-search__input,
-.header[transparent] .pill-search__input,
-header-component[transparent] .pill-search__input,
-.shopify-section-header-sticky:not(.scrolled-past-header) .pill-search__input {
+:is(.header-wrapper--transparent, [transparent]):not([data-sticky-state="active"]):not(:hover):not(:focus-within):not(:has(.predictive-search-results.is-open)) .pill-search__input {
   color: #ffffff !important;
 }
 
-.header-wrapper--transparent .pill-search__input::placeholder,
-.header--transparent .pill-search__input::placeholder,
-.header[transparent] .pill-search__input::placeholder,
-header-component[transparent] .pill-search__input::placeholder,
-.shopify-section-header-sticky:not(.scrolled-past-header) .pill-search__input::placeholder {
+:is(.header-wrapper--transparent, [transparent]):not([data-sticky-state="active"]):not(:hover):not(:focus-within):not(:has(.predictive-search-results.is-open)) .pill-search__input::placeholder {
   color: rgba(255, 255, 255, 0.85) !important;
 }
 
-/* ===== ACTIVE OPEN STATE (WHEN DRAWER IS OPEN) ===== */
-predictive-search:has(.predictive-search-results.is-open) .pill-search,
-.predictive-search-wrapper:has(.predictive-search-results.is-open) .pill-search {
+/* =====================================================================
+   3. HOVER / FOCUS / OPEN / SCROLLED STATE (Solid White Look)
+   ===================================================================== */
+
+/* Force Header Background to White on Hover/Focus */
+.header-wrapper--transparent:hover,
+.header-wrapper--transparent:focus-within,
+.header-wrapper--transparent:has(.predictive-search-results.is-open),
+[transparent]:hover,
+[transparent]:focus-within,
+[transparent]:has(.predictive-search-results.is-open) {
+  background-color: #ffffff !important;
+}
+
+/* Force Solid White Pill with Dark Text when Hovered, Focused, OR Scrolled (data-sticky-state="active") */
+.header-wrapper--transparent:hover .pill-search,
+.header-wrapper--transparent:focus-within .pill-search,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .pill-search,
+[transparent]:hover .pill-search,
+[transparent]:focus-within .pill-search,
+[transparent]:has(.predictive-search-results.is-open) .pill-search,
+[data-sticky-state="active"] .pill-search {
   background: #ffffff !important;
-  border-color: #dddddd !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  border-color: #dcdcdc !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
 }
 
-predictive-search:has(.predictive-search-results.is-open) .pill-search__icon,
-.predictive-search-wrapper:has(.predictive-search-results.is-open) .pill-search__icon {
-  color: #666666 !important;
+.header-wrapper--transparent:hover .pill-search__icon,
+.header-wrapper--transparent:focus-within .pill-search__icon,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .pill-search__icon,
+[transparent]:hover .pill-search__icon,
+[transparent]:focus-within .pill-search__icon,
+[transparent]:has(.predictive-search-results.is-open) .pill-search__icon,
+[data-sticky-state="active"] .pill-search__icon {
+  color: #333333 !important;
 }
 
-predictive-search:has(.predictive-search-results.is-open) .pill-search__input,
-.predictive-search-wrapper:has(.predictive-search-results.is-open) .pill-search__input {
+.header-wrapper--transparent:hover .pill-search__input,
+.header-wrapper--transparent:focus-within .pill-search__input,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .pill-search__input,
+[transparent]:hover .pill-search__input,
+[transparent]:focus-within .pill-search__input,
+[transparent]:has(.predictive-search-results.is-open) .pill-search__input,
+[data-sticky-state="active"] .pill-search__input {
   color: #111111 !important;
 }
 
-predictive-search:has(.predictive-search-results.is-open) .pill-search__input::placeholder,
-.predictive-search-wrapper:has(.predictive-search-results.is-open) .pill-search__input::placeholder {
-  color: #999999 !important;
-  opacity: 1;
+.header-wrapper--transparent:hover .pill-search__input::placeholder,
+.header-wrapper--transparent:focus-within .pill-search__input::placeholder,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .pill-search__input::placeholder,
+[transparent]:hover .pill-search__input::placeholder,
+[transparent]:focus-within .pill-search__input::placeholder,
+[transparent]:has(.predictive-search-results.is-open) .pill-search__input::placeholder,
+[data-sticky-state="active"] .pill-search__input::placeholder {
+  color: #777777 !important;
 }
 
-/* Force header background to solid white when search is actively open */
-.header[transparent]:has(.predictive-search-results.is-open),
-header-component[transparent]:has(.predictive-search-results.is-open),
-.header-wrapper--transparent:has(.predictive-search-results.is-open) {
-  --header-bg-color: var(--color-background, #ffffff);
-  background-color: var(--color-background, #ffffff) !important;
-}
-
-/* ===== DROPDOWN (desktop) ===== */
+/* =====================================================================
+   DESKTOP DROPDOWN RESULTS
+   ===================================================================== */
 .predictive-search-results {
   position: absolute;
   top: calc(100% + 8px);
@@ -166,7 +195,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
   display: grid;
 }
 
-/* Trending mode → single column */
 .predictive-search-results.is-trending {
   grid-template-columns: 1fr;
 }
@@ -306,7 +334,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
    MOBILE: Full-screen Takeover Drawer Layout
    ===================================================================== */
 @media screen and (max-width: 749px) {
-  /* HIDE ANNOUNCEMENT BAR & HEADER PROMOS WHEN DRAWER IS OPEN */
   body:has(.predictive-search-results.is-open) .announcement-bar,
   body:has(.predictive-search-results.is-open) .header-promos {
     display: none !important;
@@ -318,7 +345,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
     width: 100%;
   }
 
-  /* Default state when drawer is closed */
   .predictive-search-wrapper--drawer {
     position: fixed;
     top: var(--header-height, 56px);
@@ -331,7 +357,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
     z-index: 30;
   }
 
-  /* ABSOLUTE FULLSCREEN TAKEOVER ON FOCUS/OPEN */
   body:has(.predictive-search-results.is-open) {
     overflow: hidden !important;
   }
@@ -353,7 +378,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
     padding: 0 !important;
   }
 
-  /* TOP BAR: Back Button + Input Pill Container */
   predictive-search:has(.predictive-search-results.is-open) .pill-search,
   .predictive-search-wrapper:has(.predictive-search-results.is-open) .pill-search {
     display: flex !important;
@@ -379,7 +403,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
     display: none !important;
   }
 
-  /* Pill input box container on mobile */
   predictive-search:has(.predictive-search-results.is-open) .pill-search__input,
   .predictive-search-wrapper:has(.predictive-search-results.is-open) .pill-search__input {
     background: #f7f7f8 !important;
@@ -391,7 +414,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
     height: 38px !important;
   }
 
-  /* Place X clear button inside the right edge of input box */
   predictive-search:has(.predictive-search-results.is-open) .psr-clear-btn,
   .predictive-search-wrapper:has(.predictive-search-results.is-open) .psr-clear-btn {
     position: absolute !important;
@@ -405,7 +427,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
     margin: 0 !important;
   }
 
-  /* MAIN RESULTS SCROLL CONTAINER */
   .predictive-search-results {
     position: static !important;
     width: 100% !important;
@@ -424,7 +445,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
     background: #ffffff !important;
   }
 
-  /* LEFT & RIGHT CONTAINERS */
   .psr-left {
     display: block !important;
     background: #ffffff !important;
@@ -436,7 +456,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
     padding: 0 16px 24px !important;
   }
 
-  /* FULL-WIDTH GREY SECTION HEADERS */
   .psr-section h4,
   .psr-products-header {
     text-align: center !important;
@@ -459,7 +478,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
     border: none !important;
   }
 
-  /* LIST ITEMS UNDER SUGGESTIONS & COLLECTIONS */
   .psr-section a {
     padding: 12px 16px !important;
     background: #ffffff !important;
@@ -474,7 +492,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
     border-bottom: none !important;
   }
 
-  /* 2-COLUMN PRODUCT GRID */
   .psr-products-grid {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
@@ -482,7 +499,6 @@ header-component[transparent]:has(.predictive-search-results.is-open),
     margin-top: 12px !important;
   }
 
-  /* VERTICAL PRODUCT CARD */
   .psr-product {
     display: flex !important;
     flex-direction: column !important;
