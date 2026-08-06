@@ -11,66 +11,49 @@
   "type": "header",
   "name": "t:names.header",
   "sections": {
-    "header_announcements_9jGBFp": {
-      "type": "header-announcements",
+    "header_promos": {
+      "type": "header-promos",
       "blocks": {
-        "announcement_AGqRaK": {
-          "type": "_announcement",
-          "name": "t:names.announcement",
+        "header_promo_item_ra49DK": {
+          "type": "_header-promo-item",
+          "name": "Header Promo Item",
           "settings": {
-            "text": "Shop our latest arrivals!",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none",
-            "text_color": ""
+            "header_promo_text": "Free delivery over £99",
+            "header_promo_link": "",
+            "header_promo_icon": "shopify://shop_images/daals_van_logo.png"
           },
           "blocks": {}
         },
-        "announcement_PJQCNp": {
-          "type": "_announcement",
-          "name": "t:names.announcement",
+        "header_promo_item": {
+          "type": "_header-promo-item",
           "settings": {
-            "text": "Shop our latest arrivals! test",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none",
-            "text_color": ""
+            "header_promo_text": "Over 55,000 5-star reviews",
+            "header_promo_link": "",
+            "header_promo_icon": "shopify://shop_images/Frame_9_1.avif"
+          },
+          "blocks": {}
+        },
+        "header_promo_item_9nxP9L": {
+          "type": "_header-promo-item",
+          "name": "Header Promo Item",
+          "settings": {
+            "header_promo_text": "Exclusive daals designs",
+            "header_promo_link": "",
+            "header_promo_icon": "shopify://shop_images/exclusive_logo_ab.png"
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "announcement_AGqRaK",
-        "announcement_PJQCNp"
+        "header_promo_item_ra49DK",
+        "header_promo_item",
+        "header_promo_item_9nxP9L"
       ],
-      "name": "t:names.announcement_bar",
+      "name": "Header Promos",
       "settings": {
-        "speed": 5,
-        "section_width": "page-width",
-        "background_color": "#354E5A",
-        "divider_width": 1,
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "padding-block-start": 15,
-        "padding-block-end": 15
+        "background_color": "#2c3e4d"
       }
     },
-    "header_promos": {
-      "type": "header-promos",
-      "blocks": {
-        "header_promo_item" : {
-          "type": "_header-promo-item"
-        }
-      },
-      "block_order": ["header_promo_item"],
-      "name": "Header Promos",
-      "settings": {}
-    }, 
     "header_section": {
       "type": "header",
       "blocks": {
@@ -156,7 +139,6 @@
     }
   },
   "order": [
-    "header_announcements_9jGBFp",
     "header_promos",
     "header_section"
   ]
