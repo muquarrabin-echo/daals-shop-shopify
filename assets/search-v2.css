@@ -119,13 +119,15 @@ predictive-search,
    3. HOVER / FOCUS / OPEN / SCROLLED STATE (Solid White Look)
    ===================================================================== */
 
-/* Force Header Background to White on Hover/Focus */
+/* Force Header Background to White on Hover/Focus OR Scrolling */
 .header-wrapper--transparent:hover,
 .header-wrapper--transparent:focus-within,
 .header-wrapper--transparent:has(.predictive-search-results.is-open),
+.header-wrapper--transparent[data-sticky-state="active"],
 [transparent]:hover,
 [transparent]:focus-within,
-[transparent]:has(.predictive-search-results.is-open) {
+[transparent]:has(.predictive-search-results.is-open),
+[transparent][data-sticky-state="active"] {
   background-color: #ffffff !important;
 }
 
@@ -133,9 +135,11 @@ predictive-search,
 .header-wrapper--transparent:hover .pill-search,
 .header-wrapper--transparent:focus-within .pill-search,
 .header-wrapper--transparent:has(.predictive-search-results.is-open) .pill-search,
+.header-wrapper--transparent[data-sticky-state="active"] .pill-search,
 [transparent]:hover .pill-search,
 [transparent]:focus-within .pill-search,
 [transparent]:has(.predictive-search-results.is-open) .pill-search,
+[transparent][data-sticky-state="active"] .pill-search,
 [data-sticky-state="active"] .pill-search {
   background: #ffffff !important;
   border-color: #dcdcdc !important;
@@ -145,9 +149,11 @@ predictive-search,
 .header-wrapper--transparent:hover .pill-search__icon,
 .header-wrapper--transparent:focus-within .pill-search__icon,
 .header-wrapper--transparent:has(.predictive-search-results.is-open) .pill-search__icon,
+.header-wrapper--transparent[data-sticky-state="active"] .pill-search__icon,
 [transparent]:hover .pill-search__icon,
 [transparent]:focus-within .pill-search__icon,
 [transparent]:has(.predictive-search-results.is-open) .pill-search__icon,
+[transparent][data-sticky-state="active"] .pill-search__icon,
 [data-sticky-state="active"] .pill-search__icon {
   color: #333333 !important;
 }
@@ -155,9 +161,11 @@ predictive-search,
 .header-wrapper--transparent:hover .pill-search__input,
 .header-wrapper--transparent:focus-within .pill-search__input,
 .header-wrapper--transparent:has(.predictive-search-results.is-open) .pill-search__input,
+.header-wrapper--transparent[data-sticky-state="active"] .pill-search__input,
 [transparent]:hover .pill-search__input,
 [transparent]:focus-within .pill-search__input,
 [transparent]:has(.predictive-search-results.is-open) .pill-search__input,
+[transparent][data-sticky-state="active"] .pill-search__input,
 [data-sticky-state="active"] .pill-search__input {
   color: #111111 !important;
 }
@@ -165,9 +173,11 @@ predictive-search,
 .header-wrapper--transparent:hover .pill-search__input::placeholder,
 .header-wrapper--transparent:focus-within .pill-search__input::placeholder,
 .header-wrapper--transparent:has(.predictive-search-results.is-open) .pill-search__input::placeholder,
+.header-wrapper--transparent[data-sticky-state="active"] .pill-search__input::placeholder,
 [transparent]:hover .pill-search__input::placeholder,
 [transparent]:focus-within .pill-search__input::placeholder,
 [transparent]:has(.predictive-search-results.is-open) .pill-search__input::placeholder,
+[transparent][data-sticky-state="active"] .pill-search__input::placeholder,
 [data-sticky-state="active"] .pill-search__input::placeholder {
   color: #777777 !important;
 }
@@ -355,6 +365,13 @@ predictive-search,
     padding: 8px 12px;
     background: transparent;
     z-index: 0;
+  }
+
+  /* Make the drawer background white when header sticky active state is triggered */
+  :is(.header-wrapper, .header-wrapper--transparent)[data-sticky-state="active"] .predictive-search-wrapper--drawer,
+  header[data-sticky-state="active"] .predictive-search-wrapper--drawer,
+  .header[data-sticky-state="active"] .predictive-search-wrapper--drawer {
+    background: #ffffff !important;
   }
 
   body:has(.predictive-search-results.is-open) {
