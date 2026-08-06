@@ -1,3 +1,5 @@
+{{ 'search-v2.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'search-v2.js' | asset_url }}" defer="defer"></script>
 {% liquid
   assign order = 'logo,menu,localization,search,drawer_search,actions'
 
