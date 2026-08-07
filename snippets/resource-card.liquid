@@ -10,6 +10,7 @@
   @param {boolean} [image_hover] - Whether to show a secondary image on hover and focus
   @param {string} [image_sizes] - The sizes attribute for responsive images. Defaults to 'auto'
   @param {string} [product_view_context] - The context for product view events (e.g., 'search'). Omit to disable view events.
+  @param {boolean} [show_new_badge] - Whether to show a 'New' badge on the card. Only renders when `style` is 'overlay'.
 {%- enddoc -%}
 
 {% liquid
@@ -150,6 +151,18 @@
   </div>
 
   <div class="resource-card__content">
+    {% if show_new_badge and style == 'overlay' %}
+      <span class="resource-card__badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 22" aria-hidden="true">
+          <g transform="translate(0 -2)">
+            <path d="M6.7,22.447,0,24l6.7,1.84,1.415,6.039L9.53,25.844,16.136,24,9.53,22.447l-1.416-6.37Z" transform="translate(0 -9.883)" fill="currentColor"></path>
+            <path d="M53.187,23.906l-3.869.9,3.869,1.038.8,3.491.8-3.491L58.613,24.8l-3.821-.9-.8-3.68Z" transform="translate(-33.84 -14.626)" fill="currentColor"></path>
+            <path d="M34.242,0l-.613,2.831-3.019.708,3.019.8.613,2.737L34.9,4.341l2.925-.8L34.9,2.831Z" transform="translate(-20.197 2)" fill="currentColor"></path>
+          </g>
+        </svg>
+        New
+      </span>
+    {% endif %}
     <p class="resource-card__title{% if style == 'overlay' %} h5{%else %} paragraph{% endif %}">
       {{- resource.title -}}
     </p>
@@ -195,6 +208,29 @@
     position: absolute;
     inset: 0;
     z-index: 1;
+  }
+
+  .resource-card__badge {
+    position: absolute;
+    top: var(--padding-sm);
+    left: var(--padding-sm);
+    z-index: var(--layer-raised);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--padding-3xs);
+    padding: var(--padding-3xs) var(--padding-xs);
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+    font-family: var(--font-body--family);
+    font-size: var(--font-size--body-xs, 0.75rem);
+    font-weight: 600;
+    line-height: 1;
+    border-radius: var(--style-border-radius-buttons, 4px);
+  }
+
+  .resource-card__badge svg {
+    width: 14px;
+    height: 14px;
   }
 
   .resource-card__content {

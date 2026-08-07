@@ -92,6 +92,47 @@
 
     {% capture children %}
       {% for link in block_settings.menu.links %}
+        {% liquid
+          # Per-menu-item featured content override.
+          # Falls back to the block-level menu_style if this link has no mapping entry.
+          assign item_content_type = menu_content_type
+          assign feature_collection_handle = ''
+          assign feature_product_handle = ''
+          assign feature_new_badge = false
+
+          if block_settings.featured_content_mapping != blank
+            assign mapping_lines = block_settings.featured_content_mapping | strip | newline_to_br | split: '<br />'
+            for map_line in mapping_lines
+              assign parts = map_line | split: '|'
+              assign map_title = parts[0] | strip
+              if map_title == link.title
+                assign map_type = parts[1] | strip | downcase
+                assign map_handle = parts[2] | strip
+                assign map_flag = parts[3] | strip | downcase
+
+                if map_type == 'collection'
+                  assign item_content_type = 'featured_collections'
+                  assign feature_collection_handle = map_handle
+                elsif map_type == 'product'
+                  assign item_content_type = 'featured_products'
+                  assign feature_product_handle = map_handle
+                endif
+
+                if map_flag == 'new'
+                  assign feature_new_badge = true
+                endif
+              endif
+            endfor
+          endif
+
+          # Resolve the correct aspect ratio for this item's content type
+          assign item_ratio = ratio
+          if item_content_type == 'featured_collections'
+            assign item_ratio = block_settings.featured_collections_aspect_ratio
+          elsif item_content_type == 'featured_products'
+            assign item_ratio = block_settings.featured_products_aspect_ratio
+          endif
+        %}
         <li
           role="presentation"
           class="menu-list__list-item"
@@ -136,9 +177,12 @@
                       grid_columns_count: 6,
                       grid_columns_count_tablet: 4,
                       grid_columns_count_collection_images: 8,
-                      menu_content_type: menu_content_type,
-                      content_aspect_ratio: ratio,
-                      image_border_radius: image_border_radius
+                      menu_content_type: item_content_type,
+                      content_aspect_ratio: item_ratio,
+                      image_border_radius: image_border_radius,
+                      featured_collection_handle: feature_collection_handle,
+                      featured_product_handle: feature_product_handle,
+                      show_new_badge: feature_new_badge
                     %}
                   </div>
                 </div>
@@ -835,29 +879,10 @@
       "content": "t:content.submenu_feature"
     },
     {
-      "type": "select",
-      "id": "menu_style",
-      "label": "t:settings.media_type",
-      "info": "t:info.media_type_info",
-      "options": [
-        {
-          "value": "text",
-          "label": "t:options.none"
-        },
-        {
-          "value": "collection_images",
-          "label": "t:options.collection_images"
-        },
-        {
-          "value": "featured_products",
-          "label": "t:options.featured_products"
-        },
-        {
-          "value": "featured_collections",
-          "label": "t:options.featured_collections"
-        }
-      ],
-      "default": "collection_images"
+      "type": "textarea",
+      "id": "featured_content_mapping",
+      "label": "Featured content per menu item",
+      "info": "One per line. Format: Menu Item Title | type | handle | new (optional). Type is 'collection' or 'product'. Overrides the Media Type above for that specific item only. Example: Living Room | collection | carlyle-modular-sofas | new  —or—  Dining | product | oakwood-dining-table"
     },
     {
       "type": "select",

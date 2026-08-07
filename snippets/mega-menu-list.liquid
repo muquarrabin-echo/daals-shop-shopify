@@ -10,6 +10,9 @@
   @param {number} [content_aspect_ratio] - Aspect ratio for content images.
   @param {number} [image_border_radius] - Border radius for content images.
   @param {object} [section] - The section object.
+  @param {string} [featured_collection_handle] - Handle of a specific collection to feature, overriding automatic detection from menu links. Used when `menu_content_type` is 'featured_collections'.
+  @param {string} [featured_product_handle] - Handle of a specific product to feature as a single promo tile. Used when `menu_content_type` is 'featured_products'.
+  @param {boolean} [show_new_badge] - Whether to show a "New" badge on the featured collection or product tile.
 
   @example
   {% render 'mega-menu-list', parent_link: link, id: 'MegaMenuList-1', grid_columns_count: 6, menu_content_type: 'featured_products' %}
@@ -50,19 +53,28 @@
   endif
 
   if menu_content_type == 'featured_collections'
-    if parent_link.type == 'collection_link'
-      assign collection_handles = parent_link.object.handle | append: ','
-    elsif parent_link.type == 'catalog_link' or parent_link.type == 'collections_link'
-      assign collection_handles = 'all' | append: ','
+    if featured_collection_handle != blank
+      assign collection_handles = featured_collection_handle | append: ','
+    else
+      if parent_link.type == 'collection_link'
+        assign collection_handles = parent_link.object.handle | append: ','
+      elsif parent_link.type == 'catalog_link' or parent_link.type == 'collections_link'
+        assign collection_handles = 'all' | append: ','
+      endif
+      assign collection_links = parent_link.links | where: 'type', 'collection_link'
+      for collection_link in collection_links
+        assign collection_handles = collection_handles | append: collection_link.object.handle | append: ','
+      endfor
     endif
-    assign collection_links = parent_link.links | where: 'type', 'collection_link'
-    for collection_link in collection_links
-      assign collection_handles = collection_handles | append: collection_link.object.handle | append: ','
-    endfor
   endif
 
   if menu_content_type == 'featured_products'
-    if parent_link.type == 'collection_link'
+    if featured_product_handle != blank
+      assign override_product = all_products[featured_product_handle]
+      if override_product == blank
+        assign menu_content_type = 'text'
+      endif
+    elsif parent_link.type == 'collection_link'
       assign collection_object = parent_link.object
     elsif parent_link.type == 'catalog_link' or parent_link.type == 'collections_link'
       assign collection_object = collections.all
@@ -192,37 +204,46 @@
   assign min_collections = 1
 
   if menu_content_type == 'featured_products'
-    # desktop breakpoint
-    assign temp_column_count = column_count | plus: min_products
+    if override_product != blank
+      # Single hand-picked product tile: reserve 2 columns worth of space, same as a featured collection tile
+      assign max_product_columns = 2 | at_most: max_menu_columns | minus: column_count
+      assign max_menu_columns = max_menu_columns | minus: max_product_columns
 
-    if temp_column_count > max_menu_columns
-      assign max_product_columns = 2
+      assign max_product_columns_tablet = 2 | at_most: max_menu_columns_tablet | minus: column_count
+      assign max_menu_columns_tablet = max_menu_columns_tablet | minus: max_product_columns_tablet
     else
-      assign max_product_columns = max_menu_columns | minus: column_count | at_most: max_products
+      # desktop breakpoint
+      assign temp_column_count = column_count | plus: min_products
+
+      if temp_column_count > max_menu_columns
+        assign max_product_columns = 2
+      else
+        assign max_product_columns = max_menu_columns | minus: column_count | at_most: max_products
+      endif
+
+      if eager_loading
+        assign max_product_columns = max_product_columns | at_most: collection_object.products_count
+      else
+        assign max_product_columns = 0
+      endif
+
+      assign max_featured_products = max_product_columns
+      assign max_menu_columns = max_menu_columns | minus: max_product_columns
+
+      # tablet breakpoint
+      assign temp_column_count = column_count | plus: min_products_tablet
+
+      if temp_column_count > max_menu_columns_tablet
+        assign max_product_columns_tablet = 1
+      else
+        assign max_product_columns_tablet = max_menu_columns_tablet | minus: column_count | at_most: max_products_tablet
+      endif
+
+      assign max_product_columns_tablet = max_product_columns_tablet | at_most: max_product_columns
+
+      assign max_featured_products_tablet = max_product_columns_tablet
+      assign max_menu_columns_tablet = max_menu_columns_tablet | minus: max_product_columns_tablet
     endif
-
-    if eager_loading
-      assign max_product_columns = max_product_columns | at_most: collection_object.products_count
-    else
-      assign max_product_columns = 0
-    endif
-
-    assign max_featured_products = max_product_columns
-    assign max_menu_columns = max_menu_columns | minus: max_product_columns
-
-    # tablet breakpoint
-    assign temp_column_count = column_count | plus: min_products_tablet
-
-    if temp_column_count > max_menu_columns_tablet
-      assign max_product_columns_tablet = 1
-    else
-      assign max_product_columns_tablet = max_menu_columns_tablet | minus: column_count | at_most: max_products_tablet
-    endif
-
-    assign max_product_columns_tablet = max_product_columns_tablet | at_most: max_product_columns
-
-    assign max_featured_products_tablet = max_product_columns_tablet
-    assign max_menu_columns_tablet = max_menu_columns_tablet | minus: max_product_columns_tablet
   endif
 
   if menu_content_type == 'featured_collections'
@@ -279,31 +300,51 @@
       -%}
     {%- endcapture -%}
 
-    <span
-      class="mega-menu__content"
-      style="--menu-content-columns-desktop: {{ max_product_columns }}; --menu-content-columns-tablet: {{ max_product_columns_tablet }}; --resource-card-corner-radius: {{ image_border_radius }}px;"
-    >
-      <ul
-        class="mega-menu__content-list mega-menu__content-list--products list-unstyled"
+    {% if override_product != blank %}
+      <span
+        class="mega-menu__content"
+        style="--menu-content-columns-desktop: 1; --menu-content-columns-tablet: 1; --resource-card-corner-radius: {{ image_border_radius }}px;"
       >
-        {% if eager_loading %}
-          {% paginate collection_object.products by max_featured_products %}
-            {% for item in collection_object.products %}
-              <li class="mega-menu__content-list-item {% if forloop.index > max_featured_products_tablet %} mega-menu__content-list-item--hidden-tablet{% endif %}">
-                {% render 'resource-card',
-                  resource: item,
-                  resource_type: 'product',
-                  image_hover: true,
-                  image_aspect_ratio: content_aspect_ratio,
-                  image_sizes: image_sizes,
-                  product_view_context: 'dialog'
-                %}
-              </li>
-            {% endfor %}
-          {% endpaginate %}
-        {% endif %}
-      </ul>
-    </span>
+        <ul class="mega-menu__content-list mega-menu__content-list--products list-unstyled">
+          <li class="mega-menu__content-list-item">
+            {% render 'resource-card',
+              resource: override_product,
+              resource_type: 'product',
+              style: 'overlay',
+              image_aspect_ratio: content_aspect_ratio,
+              image_sizes: image_sizes,
+              show_new_badge: show_new_badge
+            %}
+          </li>
+        </ul>
+      </span>
+    {% else %}
+      <span
+        class="mega-menu__content"
+        style="--menu-content-columns-desktop: {{ max_product_columns }}; --menu-content-columns-tablet: {{ max_product_columns_tablet }}; --resource-card-corner-radius: {{ image_border_radius }}px;"
+      >
+        <ul
+          class="mega-menu__content-list mega-menu__content-list--products list-unstyled"
+        >
+          {% if eager_loading %}
+            {% paginate collection_object.products by max_featured_products %}
+              {% for item in collection_object.products %}
+                <li class="mega-menu__content-list-item {% if forloop.index > max_featured_products_tablet %} mega-menu__content-list-item--hidden-tablet{% endif %}">
+                  {% render 'resource-card',
+                    resource: item,
+                    resource_type: 'product',
+                    image_hover: true,
+                    image_aspect_ratio: content_aspect_ratio,
+                    image_sizes: image_sizes,
+                    product_view_context: 'dialog'
+                  %}
+                </li>
+              {% endfor %}
+            {% endpaginate %}
+          {% endif %}
+        </ul>
+      </span>
+    {% endif %}
   {% when 'featured_collections' %}
     {% assign collection_handles = collection_handles | split: ',' | uniq %}
     {%- capture image_sizes -%}
@@ -337,7 +378,8 @@
               resource_type: 'collection',
               style: 'overlay',
               image_aspect_ratio: content_aspect_ratio,
-              image_sizes: image_sizes
+              image_sizes: image_sizes,
+              show_new_badge: show_new_badge
             %}
           </li>
         {% endfor %}

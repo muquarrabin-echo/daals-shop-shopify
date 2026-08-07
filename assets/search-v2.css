@@ -357,7 +357,7 @@ predictive-search,
 
   .predictive-search-wrapper--drawer {
     position: fixed;
-    top: var(--header-height, 56px);
+    top: calc(var(--header-height, 56px) - 2px);
     left: 0;
     right: 0;
     width: 100%;
@@ -367,11 +367,13 @@ predictive-search,
     z-index: 0;
   }
 
-  /* Make the drawer background white when header sticky active state is triggered */
+  /* Make the drawer background white and cover any border lines when sticky active */
   :is(.header-wrapper, .header-wrapper--transparent)[data-sticky-state="active"] .predictive-search-wrapper--drawer,
   header[data-sticky-state="active"] .predictive-search-wrapper--drawer,
   .header[data-sticky-state="active"] .predictive-search-wrapper--drawer {
     background: #ffffff !important;
+    padding-top: 10px !important;
+    margin-top: -2px !important;
   }
 
   body:has(.predictive-search-results.is-open) {

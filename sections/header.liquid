@@ -1270,12 +1270,12 @@
       "type": "header",
       "content": "t:content.search"
     },
-    {
-      "type": "checkbox",
-      "id": "show_search",
-      "label": "t:settings.search_icon",
-      "default": true
-    },
+    // {
+    //   "type": "checkbox",
+    //   "id": "show_search",
+    //   "label": "t:settings.search_icon",
+    //   "default": true
+    // },
     {
       "type": "select",
       "id": "search_position",
@@ -1290,8 +1290,8 @@
           "label": "t:options.right"
         }
       ],
-      "default": "right",
-      "visible_if": "{{ section.settings.show_search }}"
+      "default": "right"
+      // "visible_if": "{{ section.settings.show_search }}"
     },
     {
       "type": "select",
@@ -1307,8 +1307,8 @@
           "label": "t:options.bottom"
         }
       ],
-      "default": "top",
-      "visible_if": "{{ section.settings.show_search }}"
+      "default": "top"
+      // "visible_if": "{{ section.settings.show_search }}"
     },
     {
       "type": "header",
