@@ -67,7 +67,7 @@
   </a>
   <div
     class="resource-card__media"
-    style="--resource-card-aspect-ratio: {{ ratio }};"
+    style="--resource-card-aspect-ratio: 4/5;"
     {% if resource_type == 'product' and settings.transition_to_main_product %}
       ref="cardGallery"
       data-view-transition-to-main-product
@@ -150,19 +150,20 @@
     {%- endif -%}
   </div>
 
+  {% if show_new_badge and style == 'overlay' %}
+    <span class="resource-card__badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 22" aria-hidden="true">
+        <g transform="translate(0 -2)">
+          <path d="M6.7,22.447,0,24l6.7,1.84,1.415,6.039L9.53,25.844,16.136,24,9.53,22.447l-1.416-6.37Z" transform="translate(0 -9.883)" fill="currentColor"></path>
+          <path d="M53.187,23.906l-3.869.9,3.869,1.038.8,3.491.8-3.491L58.613,24.8l-3.821-.9-.8-3.68Z" transform="translate(-33.84 -14.626)" fill="currentColor"></path>
+          <path d="M34.242,0l-.613,2.831-3.019.708,3.019.8.613,2.737L34.9,4.341l2.925-.8L34.9,2.831Z" transform="translate(-20.197 2)" fill="currentColor"></path>
+        </g>
+      </svg>
+      New
+    </span>
+  {% endif %}
+
   <div class="resource-card__content">
-    {% if show_new_badge and style == 'overlay' %}
-      <span class="resource-card__badge">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 22" aria-hidden="true">
-          <g transform="translate(0 -2)">
-            <path d="M6.7,22.447,0,24l6.7,1.84,1.415,6.039L9.53,25.844,16.136,24,9.53,22.447l-1.416-6.37Z" transform="translate(0 -9.883)" fill="currentColor"></path>
-            <path d="M53.187,23.906l-3.869.9,3.869,1.038.8,3.491.8-3.491L58.613,24.8l-3.821-.9-.8-3.68Z" transform="translate(-33.84 -14.626)" fill="currentColor"></path>
-            <path d="M34.242,0l-.613,2.831-3.019.708,3.019.8.613,2.737L34.9,4.341l2.925-.8L34.9,2.831Z" transform="translate(-20.197 2)" fill="currentColor"></path>
-          </g>
-        </svg>
-        New
-      </span>
-    {% endif %}
     <p class="resource-card__title{% if style == 'overlay' %} h5{%else %} paragraph{% endif %}">
       {{- resource.title -}}
     </p>
@@ -217,18 +218,20 @@
     z-index: var(--layer-raised);
     display: inline-flex;
     align-items: center;
-    gap: var(--padding-3xs);
-    padding: var(--padding-3xs) var(--padding-xs);
+    gap: var(--padding-2xs);
+    padding: var(--padding-2xs) var(--padding-sm);
     background-color: var(--color-foreground);
     color: var(--color-background);
     font-family: var(--font-body--family);
     font-size: var(--font-size--body-xs, 0.75rem);
     font-weight: 600;
     line-height: 1;
+    white-space: nowrap;
     border-radius: var(--style-border-radius-buttons, 4px);
   }
 
   .resource-card__badge svg {
+    flex-shrink: 0;
     width: 14px;
     height: 14px;
   }
