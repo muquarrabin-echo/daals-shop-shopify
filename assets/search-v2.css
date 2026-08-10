@@ -130,6 +130,55 @@ predictive-search,
 [transparent][data-sticky-state="active"] {
   background-color: #ffffff !important;
 }
+/* Make menu links black when the transparent header turns white */
+.header-wrapper--transparent:hover .menu-list__link,
+.header-wrapper--transparent:focus-within .menu-list__link,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .menu-list__link,
+.header-wrapper--transparent[data-sticky-state="active"] .menu-list__link,
+[transparent]:hover .menu-list__link,
+[transparent]:focus-within .menu-list__link,
+[transparent]:has(.predictive-search-results.is-open) .menu-list__link,
+[transparent][data-sticky-state="active"] .menu-list__link,
+[data-sticky-state="active"] .menu-list__link {
+  color: #000000 !important;
+  --menu-top-level-font-color: #000000 !important;
+  --menu-top-level-font-color-rgb: 0, 0, 0 !important;
+}
+
+/* Make logo black when the transparent header turns white */
+.header-wrapper--transparent:hover .header-logo,
+.header-wrapper--transparent:focus-within .header-logo,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .header-logo,
+.header-wrapper--transparent[data-sticky-state="active"] .header-logo,
+[transparent]:hover .header-logo,
+[transparent]:focus-within .header-logo,
+[transparent]:has(.predictive-search-results.is-open) .header-logo,
+[transparent][data-sticky-state="active"] .header-logo,
+[data-sticky-state="active"] .header-logo {
+  color: #000000 !important;
+}
+
+/* Ensure the inner SVGs/icons match */
+.header-wrapper--transparent:hover .header-actions__action svg,
+.header-wrapper--transparent:hover .header__icon svg,
+.header-wrapper--transparent:focus-within .header-actions__action svg,
+.header-wrapper--transparent:focus-within .header__icon svg,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .header-actions__action svg,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .header__icon svg,
+.header-wrapper--transparent[data-sticky-state="active"] .header-actions__action svg,
+.header-wrapper--transparent[data-sticky-state="active"] .header__icon svg,
+[transparent]:hover .header-actions__action svg,
+[transparent]:hover .header__icon svg,
+[transparent]:focus-within .header-actions__action svg,
+[transparent]:focus-within .header__icon svg,
+[transparent]:has(.predictive-search-results.is-open) .header-actions__action svg,
+[transparent]:has(.predictive-search-results.is-open) .header__icon svg,
+[transparent][data-sticky-state="active"] .header-actions__action svg,
+[transparent][data-sticky-state="active"] .header__icon svg,
+[data-sticky-state="active"] .header-actions__action svg,
+[data-sticky-state="active"] .header__icon svg {
+  color: #000000 !important;
+}
 
 /* Force Solid White Pill with Dark Text when Hovered, Focused, OR Scrolled (data-sticky-state="active") */
 .header-wrapper--transparent:hover .pill-search,
