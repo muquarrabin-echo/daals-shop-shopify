@@ -1,0 +1,110 @@
+.carousel-section {
+  padding-top: var(--padding-top, 40px);
+  padding-bottom: var(--padding-bottom, 40px);
+}
+
+.carousel-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.carousel-section__heading {
+  font-family: var(--font-heading-family, serif);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.carousel-section__nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.carousel-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.carousel-arrow:hover {
+  background: #f2f2f2;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.5rem;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: 280px;
+  aspect-ratio: 3 / 4;
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 749px) {
+  .carousel-card {
+    width: 68vw;
+  }
+}
+
+.carousel-card__link {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+.carousel-card__image,
+.carousel-card .placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.carousel-card__link:hover .carousel-card__image {
+  transform: scale(1.05);
+}
+
+.carousel-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 45%);
+  pointer-events: none;
+}
+
+.carousel-card__title {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  color: #fff;
+  font-family: var(--font-heading-family, serif);
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+}
