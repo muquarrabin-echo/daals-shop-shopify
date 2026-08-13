@@ -1,0 +1,88 @@
+{{ 'section-collection-banner-grid.css' | asset_url | stylesheet_tag }}
+
+<div class="banner-grid">
+  <div class="banner-grid__inner page-width">
+    {% for block in section.blocks %}
+      {% assign collection = block.settings.collection %}
+      <div class="banner-grid__item" {{ block.shopify_attributes }}>
+        <a href="{{ collection.url | default: '#' }}" class="banner-grid__link">
+          <div class="banner-grid__image-wrap">
+            {% if collection.featured_image %}
+              {{ collection.featured_image | image_url: width: 1200 | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 750px) 33vw, 100vw',
+                widths: '400,600,800,1000,1200',
+                class: 'banner-grid__image'
+              }}
+            {% else %}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'banner-grid__image placeholder' }}
+            {% endif %}
+          </div>
+          <div class="banner-grid__caption" style="background-color: {{ block.settings.bg_color }};">
+            {% if collection.title != blank %}
+              <h3 class="banner-grid__title">{{ collection.title }}</h3>
+            {% endif %}
+            {% if block.settings.subtitle != blank %}
+              <p class="banner-grid__subtitle">{{ block.settings.subtitle }}</p>
+            {% endif %}
+            {% if block.settings.button_label != blank %}
+              <span class="banner-grid__button">{{ block.settings.button_label }}</span>
+            {% endif %}
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Banner Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Collection Banner",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "subtitle", "label": "Description", "default": "Short supporting text goes here." },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+        { "type": "color", "id": "bg_color", "label": "Caption background color", "default": "#5c4033" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Banner Grid",
+      "blocks": [
+        { "type": "banner" },
+        { "type": "banner" },
+        { "type": "banner" }
+      ]
+    }
+  ]
+}
+{% endschema %}
