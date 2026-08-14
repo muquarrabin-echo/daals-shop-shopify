@@ -614,3 +614,22 @@ predictive-search,
     display: none;
   }
 }
+
+/* Header transparent hover */
+.header-wrapper--transparent:hover,
+[transparent]:hover,
+
+/* Search hover */
+.header-wrapper--transparent:has(.pill-search:hover),
+[transparent]:has(.pill-search:hover),
+
+/* Search focus */
+.header-wrapper--transparent:focus-within,
+[transparent]:focus-within,
+
+/* Search results open */
+.header-wrapper--transparent:has(.predictive-search-results.is-open),
+[transparent]:has(.predictive-search-results.is-open) {
+  --header-logo-display: unset !important;
+  --header-logo-inverse-display: unset !important;
+}
