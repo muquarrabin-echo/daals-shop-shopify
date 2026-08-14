@@ -3,7 +3,7 @@
 <div class="carousel-section page-width">
   <div class="carousel-section__header">
     {% if section.settings.heading != blank %}
-      <h2 class="carousel-section__heading">{{ section.settings.heading }}</h2>
+      <h2 class="carousel-section__heading" style="color: {{ section.settings.heading_color }};">{{ section.settings.heading }}</h2>
     {% endif %}
     <div class="carousel-section__nav">
       <button type="button" class="carousel-arrow carousel-arrow--prev" aria-label="Previous">&#8249;</button>
@@ -61,6 +61,7 @@
   "class": "section",
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Our Garden Collections" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#000000" },
     {
       "type": "range",
       "id": "padding_top",
