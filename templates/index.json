@@ -161,6 +161,7 @@
       "settings": {
         "heading": "Our Garden Collections",
         "heading_color": "#000000",
+        "background_color": "#ffffff",
         "padding_top": 40,
         "padding_bottom": 40
       }
