@@ -341,6 +341,64 @@
         "padding_top": 40,
         "padding_bottom": 40
       }
+    },
+    "description_collection_carousel_Xz5hPq": {
+      "type": "description-collection-carousel",
+      "blocks": {
+        "collection_card_1": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "",
+            "image": "",
+            "label": "",
+            "fallback_title": "Collection"
+          }
+        },
+        "collection_card_2": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "",
+            "image": "",
+            "label": "",
+            "fallback_title": "Collection"
+          }
+        },
+        "collection_card_3": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "",
+            "image": "",
+            "label": "",
+            "fallback_title": "Collection"
+          }
+        },
+        "collection_card_4": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "",
+            "image": "",
+            "label": "",
+            "fallback_title": "Collection"
+          }
+        }
+      },
+      "block_order": [
+        "collection_card_1",
+        "collection_card_2",
+        "collection_card_3",
+        "collection_card_4"
+      ],
+      "name": "t:names.description_collection_carousel",
+      "settings": {
+        "heading": "Designed for living",
+        "heading_color": "#000000",
+        "description": "<p>A home is more than its structure. These are the finishing layers, the textiles, the outdoor moments, the adaptable pieces that make daily life feel considered and complete.</p>",
+        "background_color": "#ffffff",
+        "show_bottom_border": true,
+        "border_color": "#e5e5e5",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
@@ -349,6 +407,7 @@
     "collection_carousel_K9x2Lp",
     "featured_collection_9F3kLq",
     "collection_carousel_Fr2sTm",
-    "collection_carousel_Qw8vBn"
+    "collection_carousel_Qw8vBn",
+    "description_collection_carousel_Xz5hPq"
   ]
 }

@@ -1,0 +1,144 @@
+.dcc-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
+  /* fallback padding if inline style hasn't applied yet */
+  padding-block: 6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .dcc-section {
+    grid-template-columns: 300px 1fr;
+    align-items: start;
+    gap: 4rem;
+  }
+}
+
+/* ===== LEFT: heading, description, arrows ===== */
+.dcc-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.dcc-heading {
+  font-family: var(--font-heading-family);
+  font-size: 2.6rem;
+  margin: 0;
+}
+
+.dcc-description {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-foreground, #333);
+  max-width: 32rem;
+}
+
+.dcc-description p {
+  margin: 0;
+}
+
+.dcc-nav {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+.dcc-arrow {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.dcc-arrow:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+/* ===== RIGHT: scrollable carousel ===== */
+.dcc-right {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.dcc-separator {
+  border-top: 1px solid #e5e5e5;
+  margin-top: 2.4rem;
+}
+
+.dcc-track {
+  display: flex;
+  gap: 1.6rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.dcc-track::-webkit-scrollbar {
+  display: none;
+}
+
+.dcc-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: 26rem;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--style-border-radius-outset, 4px);
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.dcc-card__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.dcc-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.dcc-card:hover .dcc-card__image {
+  transform: scale(1.04);
+}
+
+.dcc-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0) 45%);
+  pointer-events: none;
+}
+
+.dcc-card__title {
+  position: absolute;
+  left: 1.6rem;
+  bottom: 1.6rem;
+  color: #fff;
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  z-index: 1;
+}
+
+.dcc-card--placeholder {
+  background: var(--color-background-secondary, #f0f0f0);
+}
