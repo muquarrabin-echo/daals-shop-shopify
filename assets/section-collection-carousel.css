@@ -11,7 +11,6 @@
 }
 
 .carousel-section__heading {
-  font-family: var(--font-heading-family, serif);
   font-size: 1.5rem;
   margin: 0;
 }
@@ -104,7 +103,6 @@
   left: 1rem;
   bottom: 1rem;
   color: #fff;
-  font-family: var(--font-heading-family, serif);
   font-size: 1.25rem;
   letter-spacing: 0.02em;
 }
