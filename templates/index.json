@@ -550,6 +550,114 @@
         "text_color": "#4a4a4a",
         "icon_background": "#f5f0eb"
       }
+    },
+    "image_with_text_split_left_T4nP8q": {
+      "type": "image-with-text-split",
+      "settings": {
+        "image": "",
+        "image_position": "left",
+        "heading": "The Art of Choosing Well.",
+        "text": "<p>At daals, we select and design furniture with intention. From concept and material selection to final finish and delivery, every piece is shaped by balance, function, and lasting appeal. Crafted globally and managed end to end, our collections are created to work together, helping you build a home that feels considered, not complicated.</p>",
+        "button_label": "See How We Work",
+        "button_link": "",
+        "background_color": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "text_color": "#4a4a4a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "newsletter_signup_M9kL2w": {
+      "type": "newsletter-signup",
+      "settings": {
+        "heading": "Better decisions, delivered.",
+        "text": "<p>Sign up for carefully selected releases, room guidance, and exclusive previews shaped by our design team.</p>",
+        "legal_text": "<p>By subscribing, you agree to our Privacy Policy and consent to receive communications from daals.</p>",
+        "placeholder": "Enter your email address",
+        "button_label": "SUBSCRIBE",
+        "success_message": "Thanks for subscribing!",
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "text_color": "#4a4a4a",
+        "legal_color": "#6b6b6b",
+        "separator_color": "#000000",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "show_separator": true
+      }
+    },
+    "description_collection_carousel_Y7hR3s": {
+      "type": "description-collection-carousel",
+      "blocks": {
+        "collection_card_1": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "",
+            "image": "",
+            "label": "",
+            "fallback_title": "Collection"
+          }
+        },
+        "collection_card_2": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "",
+            "image": "",
+            "label": "",
+            "fallback_title": "Collection"
+          }
+        },
+        "collection_card_3": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "",
+            "image": "",
+            "label": "",
+            "fallback_title": "Collection"
+          }
+        },
+        "collection_card_4": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "",
+            "image": "",
+            "label": "",
+            "fallback_title": "Collection"
+          }
+        }
+      },
+      "block_order": [
+        "collection_card_1",
+        "collection_card_2",
+        "collection_card_3",
+        "collection_card_4"
+      ],
+      "settings": {
+        "heading": "Designed for living",
+        "heading_color": "#000000",
+        "description": "<p>A home is more than its structure. These are the finishing layers, the textiles, the outdoor moments, the adaptable pieces that make daily life feel considered and complete.</p>",
+        "background_color": "#ffffff",
+        "show_bottom_border": true,
+        "border_color": "#e5e5e5",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "image_with_text_split_right_K8vN4m": {
+      "type": "image-with-text-split",
+      "settings": {
+        "image": "",
+        "image_position": "right",
+        "heading": "The Art of Choosing Well.",
+        "text": "<p>At daals, we select and design furniture with intention. From concept and material selection to final finish and delivery, every piece is shaped by balance, function, and lasting appeal. Crafted globally and managed end to end, our collections are created to work together, helping you build a home that feels considered, not complicated.</p>",
+        "button_label": "See How We Work",
+        "button_link": "",
+        "background_color": "#f5f0eb",
+        "heading_color": "#1a1a1a",
+        "text_color": "#4a4a4a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
@@ -561,6 +669,10 @@
     "collection_carousel_Qw8vBn",
     "description_collection_carousel_Xz5hPq",
     "reviews_marquee_Kd7nWs",
-    "feature_highlights_R7mK2p"
+    "feature_highlights_R7mK2p",
+    "image_with_text_split_left_T4nP8q",
+    "newsletter_signup_M9kL2w",
+    "description_collection_carousel_Y7hR3s",
+    "image_with_text_split_right_K8vN4m"
   ]
 }

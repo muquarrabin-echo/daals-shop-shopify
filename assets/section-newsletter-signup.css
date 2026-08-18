@@ -1,0 +1,149 @@
+.ns-section {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.ns-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Heading */
+.ns-heading {
+  margin: 0 0 1rem;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ns-heading-color, #1a1a1a);
+  letter-spacing: -0.01em;
+}
+
+/* Main text */
+.ns-text {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ns-text-color, #4a4a4a);
+}
+
+.ns-text p {
+  margin: 0;
+}
+
+/* Legal text */
+.ns-legal {
+  margin: 0 0 2rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--ns-legal-color, #6b6b6b);
+}
+
+.ns-legal p {
+  margin: 0;
+}
+
+.ns-legal a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Form */
+.ns-form {
+  margin: 0;
+}
+
+.ns-form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.ns-input {
+  flex: 1 1 220px;
+  min-width: 0;
+  height: 48px;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-right: none;
+  outline: none;
+  border-radius: 0;
+}
+
+.ns-input::placeholder {
+  color: #9a9a9a;
+}
+
+.ns-input:focus {
+  border-color: #1a1a1a;
+}
+
+.ns-button {
+  flex: 0 0 auto;
+  height: 48px;
+  padding: 0 1.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: #000000;
+  border: 1px solid #000000;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.ns-button:hover {
+  background-color: #333333;
+  border-color: #333333;
+}
+
+/* Messages */
+.ns-message {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.ns-message--success {
+  color: #2e7d32;
+}
+
+.ns-message--error {
+  color: #c62828;
+}
+
+/* Bottom separator */
+.ns-separator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  margin-bottom: 30px;
+  background-color: var(--ns-separator-color, #000000);
+}
+
+/* Mobile */
+@media screen and (max-width: 549px) {
+  .ns-form-row {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .ns-input {
+    border-right: 1px solid #d0d0d0;
+    border-bottom: none;
+  }
+
+  .ns-button {
+    width: 100%;
+  }
+}
