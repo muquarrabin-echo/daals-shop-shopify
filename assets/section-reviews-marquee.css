@@ -1,0 +1,288 @@
+.rvm-section {
+  position: relative;
+  color: #fff;
+  padding-top: 4rem;
+  /* No overflow:hidden here - it would clip .rvm-track-wrap and
+     .rvm-marquee-wrap, which need to break out past this element's
+     own edges to reach the true viewport edges. Those two elements
+     each have their own overflow:hidden scoped to just their scroll
+     region, which is what actually needs clipping. */
+}
+
+.rvm-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15) 55%, rgba(0, 0, 0, 0.55));
+  pointer-events: none;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  
+}
+
+.rvm-top,
+.rvm-track-wrap,
+.rvm-marquee-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Top: heading + rating + arrows ===== */
+.rvm-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.4rem;
+}
+
+.rvm-heading {
+  font-family: var(--font-heading-family), Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  font-size: 2rem;
+  margin: 0 0 0.6rem;
+  color: #fff;
+}
+
+.rvm-rating-line {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.rvm-rating-prefix {
+  color: #fff;
+  font-weight: 400;
+}
+
+.rvm-rating-word {
+  color: #00b67a;
+  font-weight: 700;
+}
+
+.rvm-rating-suffix {
+  color: #fff;
+  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.rvm-nav {
+  display: flex;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+.rvm-arrow {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.rvm-arrow:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== Review cards ===== */
+.rvm-track-wrap {
+  overflow: hidden;
+  padding-bottom: 4rem;
+  
+}
+
+.rvm-track {
+  display: flex;
+  gap: 2.4rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  list-style: none;
+  margin: 0;
+  padding-left: var(--page-margin, max(2rem, calc((100vw - 120rem) / 2 + 2rem)));
+  padding-right: var(--page-margin, max(2rem, calc((100vw - 120rem) / 2 + 2rem)));
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.rvm-track::-webkit-scrollbar {
+  display: none;
+}
+
+.rvm-card {
+  flex: 0 0 auto;
+  display: flex;
+  width: 40rem;
+  min-height: 20rem;
+  background: #f2ede3;
+  border-radius: var(--style-border-radius-outset, 4px);
+  padding: 1.6rem;
+  gap: 1.6rem;
+  scroll-snap-align: start;
+  color: #1a1a1a;
+}
+
+.rvm-card--placeholder {
+  color: #1a1a1a;
+}
+
+.rvm-card__image-wrap {
+  flex: 0 0 13rem;
+  align-self: stretch;
+}
+
+.rvm-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--style-border-radius-outset, 4px);
+  display: block;
+}
+
+.rvm-card__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.rvm-card__stars {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.rvm-star {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  background: #dcdcdc;
+  color: #dcdcdc;
+  font-size: 1.1rem;
+}
+
+.rvm-star--filled {
+  background: #00b67a;
+  color: #fff;
+}
+
+.rvm-card__title {
+  font-family: var(--font-heading-family), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.4rem;
+  margin: 0 0 0.6rem;
+}
+
+.rvm-card__quote {
+  font-family: var(--font-heading-family), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #4a4a4a;
+  margin: 0 0 1rem;
+}
+
+.rvm-card__name {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: auto 0 0;
+}
+
+/* ===== Marquee ===== */
+.rvm-marquee-wrap {
+  padding-block: 2rem;
+}
+
+.rvm-marquee-label {
+  margin: 0 0 1.2rem;
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.rvm-marquee {
+  overflow: hidden;
+  width: 100%;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+}
+
+.rvm-marquee__track {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  width: max-content;
+  animation: rvm-scroll 30s linear infinite;
+}
+
+@keyframes rvm-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.rvm-marquee__item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rvm-marquee__logo {
+  height: 3.2rem;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.rvm-marquee__text {
+  color: #fff;
+  font-weight: 700;
+  font-size: 2rem;
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
+/* Pause marquee for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .rvm-marquee__track {
+    animation: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .rvm-top {
+    flex-direction: column;
+  }
+
+  .rvm-card {
+    width: 30rem;
+  }
+
+  .rvm-card__image-wrap {
+    flex: 0 0 10rem;
+  }
+}

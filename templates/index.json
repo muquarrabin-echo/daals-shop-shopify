@@ -399,6 +399,113 @@
         "padding_top": 60,
         "padding_bottom": 60
       }
+    },
+    "reviews_marquee_Kd7nWs": {
+      "type": "reviews-marquee",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "image": "",
+            "rating": 5,
+            "title": "Amazing quality!",
+            "quote": "The quality is amazing - my order looks brilliant and the delivery men were lovely and friendly. It was simple and easy to put together. Thanks daals, will definitely be ordering from you again.",
+            "name": "Depash"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "image": "",
+            "rating": 5,
+            "title": "Perfect blend of style and function!",
+            "quote": "Quick delivery, easy to set up, and exactly as described. The finish is beautiful, the build is sturdy, and it's wonderfully comfortable. A perfect blend of style and function.",
+            "name": "Kenneth"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "image": "",
+            "rating": 5,
+            "title": "Friendly & responsive team!",
+            "quote": "Outstanding quality! My purchase was soft, durable, and true to the photos. The colours add warmth and character, clearly crafted with care. Service was equally impressive, friendly, responsive and above-and-beyond.",
+            "name": "Sonia"
+          }
+        },
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "image": "",
+            "text": "theguardian"
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "image": "",
+            "text": "DECOR"
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "image": "",
+            "text": "THE TIMES"
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "image": "",
+            "text": "ITV"
+          }
+        },
+        "logo_5": {
+          "type": "logo",
+          "settings": {
+            "image": "",
+            "text": "COSMOPOLITAN"
+          }
+        },
+        "logo_6": {
+          "type": "logo",
+          "settings": {
+            "image": "",
+            "text": "Ideal Home"
+          }
+        },
+        "logo_7": {
+          "type": "logo",
+          "settings": {
+            "image": "",
+            "text": "apartment therapy"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "logo_5",
+        "logo_6",
+        "logo_7"
+      ],
+      "name": "t:names.reviews_marquee",
+      "settings": {
+        "background_image": "",
+        "fallback_background_color": "#2b2118",
+        "heading": "Don't just take our word",
+        "rating_prefix": "Rated",
+        "rating_word": "Excellent",
+        "rating_suffix": "on Trustpilot",
+        "marquee_label": "As Seen in:",
+        "marquee_speed": 30
+      }
     }
   },
   "order": [
@@ -408,6 +515,7 @@
     "featured_collection_9F3kLq",
     "collection_carousel_Fr2sTm",
     "collection_carousel_Qw8vBn",
-    "description_collection_carousel_Xz5hPq"
+    "description_collection_carousel_Xz5hPq",
+    "reviews_marquee_Kd7nWs"
   ]
 }
