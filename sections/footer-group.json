@@ -138,10 +138,10 @@
             "email-signup_HafH7P"
           ]
         },
-        "menu_footer": {
+        "menu_about": {
           "type": "menu",
           "settings": {
-            "menu": "footer",
+            "menu": "about-us",
             "heading": "",
             "menu_spacing": 12,
             "show_as_accordion": false,
@@ -155,10 +155,27 @@
             "padding-inline-end": 0
           }
         },
-        "menu_main": {
+        "menu_customer": {
           "type": "menu",
           "settings": {
-            "menu": "main-menu",
+            "menu": "customer-care",
+            "heading": "",
+            "menu_spacing": 12,
+            "show_as_accordion": false,
+            "accordion_icon": "plus",
+            "accordion_dividers": false,
+            "heading_preset": "paragraph",
+            "link_preset": "paragraph",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          }
+        },
+        "menu_order": {
+          "type": "menu",
+          "settings": {
+            "menu": "your-order",
             "heading": "",
             "menu_spacing": 12,
             "show_as_accordion": false,
@@ -175,8 +192,9 @@
       },
       "block_order": [
         "group_wErUQf",
-        "menu_footer",
-        "menu_main"
+        "menu_about",
+        "menu_customer",
+        "menu_order"
       ],
       "name": "t:names.footer",
       "settings": {
