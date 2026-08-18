@@ -46,9 +46,12 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   list-style: none;
-  margin: 0;
   padding: 0 0 0.5rem;
   scrollbar-width: none;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  justify-content: center;
 }
 
 .carousel-track::-webkit-scrollbar {
