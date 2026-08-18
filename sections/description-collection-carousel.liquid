@@ -2,19 +2,33 @@
 
 <style>
   #shopify-section-{{ section.id }} {
-    background-color: {{ section.settings.background_color }};
+    --dcc-bg: {{ section.settings.background_color }};
+    --dcc-heading-color: {{ section.settings.heading_color }};
+    --dcc-text-color: {{ section.settings.text_color }};
+    --dcc-arrow-color: {{ section.settings.arrow_color }};
+    --dcc-arrow-border: {{ section.settings.arrow_border_color }};
+    --dcc-arrow-hover-bg: {{ section.settings.arrow_hover_bg }};
+    --dcc-card-title-color: {{ section.settings.card_title_color }};
+    --dcc-border-color: {{ section.settings.border_color }};
+    --dcc-padding-top: {{ section.settings.padding_top }}px;
+    --dcc-padding-bottom: {{ section.settings.padding_bottom }}px;
+
+    background-color: var(--dcc-bg);
+    {%- if section.settings.show_bottom_border %}
+    border-bottom: 1px solid var(--dcc-border-color);
+    {%- endif %}
   }
 
   #dcc-{{ section.id }}.dcc-section {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-top: var(--dcc-padding-top);
+    padding-bottom: var(--dcc-padding-bottom);
   }
 </style>
 
 <div class="dcc-section page-width" id="dcc-{{ section.id }}">
   <div class="dcc-left">
     {%- if section.settings.heading != blank -%}
-      <h2 class="dcc-heading" style="color: {{ section.settings.heading_color }};">{{ section.settings.heading }}</h2>
+      <h2 class="dcc-heading">{{ section.settings.heading }}</h2>
     {%- endif -%}
 
     {%- if section.settings.description != blank -%}
@@ -62,7 +76,9 @@
                 {{ 'lifestyle-1' | placeholder_svg_tag: 'dcc-card__image placeholder' }}
               {%- endif -%}
               <span class="dcc-card__overlay"></span>
-              <span class="dcc-card__title">{{ custom_label | default: col.title | default: block.settings.fallback_title }}</span>
+              <span class="dcc-card__title">
+                {{ custom_label | default: col.title | default: block.settings.fallback_title }}
+              </span>
             </a>
           </li>
         {%- endif -%}
@@ -76,10 +92,6 @@
         {%- endfor -%}
       {%- endfor -%}
     </ul>
-
-    {%- if section.settings.show_bottom_border -%}
-      <div class="dcc-separator" style="border-color: {{ section.settings.border_color }};"></div>
-    {%- endif -%}
   </div>
 </div>
 
@@ -97,12 +109,16 @@
       return card ? card.offsetWidth + 16 : 300;
     };
 
-    prev.addEventListener('click', function () {
-      track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
-    });
-    next.addEventListener('click', function () {
-      track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
-    });
+    if (prev) {
+      prev.addEventListener('click', function () {
+        track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+      });
+    }
+    if (next) {
+      next.addEventListener('click', function () {
+        track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+      });
+    }
   })();
 </script>
 
@@ -113,16 +129,14 @@
   "class": "section",
   "settings": [
     {
+      "type": "header",
+      "content": "Content"
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "Designed for living"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color",
-      "default": "#000000"
     },
     {
       "type": "richtext",
@@ -131,9 +145,49 @@
       "default": "<p>A home is more than its structure. These are the finishing layers, the textiles, the outdoor moments, the adaptable pieces that make daily life feel considered and complete.</p>"
     },
     {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow icon color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "arrow_border_color",
+      "label": "Arrow border color",
+      "default": "rgba(0,0,0,0.15)"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_bg",
+      "label": "Arrow hover background",
+      "default": "rgba(0,0,0,0.04)"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card title color",
       "default": "#ffffff"
     },
     {
@@ -149,10 +203,14 @@
       "default": "#e5e5e5"
     },
     {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Top padding",
@@ -162,7 +220,7 @@
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Bottom padding",
@@ -174,17 +232,36 @@
       "type": "collection_card",
       "name": "Collection card",
       "settings": [
-        { "type": "collection", "id": "collection", "label": "Collection" },
-        { "type": "image_picker", "id": "image", "label": "Custom image", "info": "Optional. Overrides the collection's featured image." },
-        { "type": "text", "id": "label", "label": "Custom label", "info": "Defaults to the collection title if left blank." },
-        { "type": "text", "id": "fallback_title", "label": "Fallback title (if no collection selected)", "default": "Collection" }
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom image",
+          "info": "Optional. Overrides the collection's featured image."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Custom label",
+          "info": "Defaults to the collection title if left blank."
+        },
+        {
+          "type": "text",
+          "id": "fallback_title",
+          "label": "Fallback title (if no collection selected)",
+          "default": "Collection"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Description Carousel",
-      "category": "Custom Sections",
+      "name": "Description collection carousel",
+      "category": "Custom Collections",
       "blocks": [
         { "type": "collection_card" },
         { "type": "collection_card" },

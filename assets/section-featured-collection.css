@@ -1,14 +1,15 @@
 .feature-section {
-  padding-block: var(--space-xl, 4rem);
+  width: 100%;
 }
 
 .feature-heading {
   font-family: var(--font-heading-family);
   font-size: var(--font-heading-scale-h2, 2.8rem);
   margin: 0 0 2.4rem;
+  color: var(--fc-heading-color, #000000);
 }
 
-/* ===== Grid layout: left fixed column, right flexible column ===== */
+/* ===== Grid layout ===== */
 .feature-section-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -60,9 +61,8 @@
   left: 0;
   bottom: 0;
   padding: 2.4rem;
-  color: #fff;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
   width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
 }
 
 .featured-product-label {
@@ -71,6 +71,7 @@
   text-transform: uppercase;
   margin: 0 0 0.4rem;
   opacity: 0.9;
+  color: var(--fc-label-color, #ffffff);
 }
 
 .featured-product-sublabel {
@@ -79,6 +80,7 @@
   margin: 0;
   text-decoration: underline;
   text-underline-offset: 0.4rem;
+  color: var(--fc-sublabel-color, #ffffff);
 }
 
 /* ===== RIGHT: scrollable collection grid ===== */
@@ -86,24 +88,22 @@
   min-width: 0;
 }
 
-/* Match the scroll area height to the sticky image so it visibly scrolls
-   inside its own box instead of growing the page. */
 .feature-scroll {
   max-height: 60rem; /* fallback until JS measures the featured image */
   overflow-y: auto;
   overscroll-behavior: auto;
   padding-right: 0.6rem;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .feature-scroll::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, newer Edge */
+  display: none;
 }
 
 .feature-collection-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(var(--fc-columns, 2), 1fr);
   gap: 1.2rem;
 }
 
@@ -132,7 +132,7 @@
   position: absolute;
   left: 1.6rem;
   bottom: 1.4rem;
-  color: #fff;
+  color: var(--fc-tile-label-color, #ffffff);
   font-family: var(--font-heading-family);
   font-size: 1.9rem;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
@@ -150,7 +150,7 @@
   height: 60%;
 }
 
-/* On mobile, let the right grid sit under the (non-sticky) left image */
+/* ===== Mobile ===== */
 @media screen and (max-width: 749px) {
   .feature-sticky {
     position: static;
@@ -159,5 +159,13 @@
   .feature-scroll {
     max-height: none;
     overflow-y: visible;
+  }
+
+  .feature-collection-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .feature-heading {
+    font-size: 2.2rem;
   }
 }

@@ -1,9 +1,8 @@
+/* ===== Section layout ===== */
 .dcc-section {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2.4rem;
-  /* fallback padding if inline style hasn't applied yet */
-  padding-block: 6rem;
 }
 
 @media screen and (min-width: 750px) {
@@ -14,7 +13,7 @@
   }
 }
 
-/* ===== LEFT: heading, description, arrows ===== */
+/* ===== Left column ===== */
 .dcc-left {
   display: flex;
   flex-direction: column;
@@ -25,12 +24,14 @@
   font-family: var(--font-heading-family);
   font-size: 2.6rem;
   margin: 0;
+  color: var(--dcc-heading-color, #000000);
+  line-height: 1.2;
 }
 
 .dcc-description {
   font-size: 1rem;
   line-height: 1.5;
-  color: var(--color-foreground, #333);
+  color: var(--dcc-text-color, #333333);
   max-width: 32rem;
 }
 
@@ -38,6 +39,7 @@
   margin: 0;
 }
 
+/* Navigation arrows */
 .dcc-nav {
   display: flex;
   gap: 0.8rem;
@@ -48,8 +50,9 @@
   width: 3.6rem;
   height: 3.6rem;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--dcc-arrow-border, rgba(0, 0, 0, 0.15));
   background: transparent;
+  color: var(--dcc-arrow-color, #000000);
   font-size: 1.8rem;
   line-height: 1;
   cursor: pointer;
@@ -60,19 +63,14 @@
 }
 
 .dcc-arrow:hover {
-  background: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.3);
+  background: var(--dcc-arrow-hover-bg, rgba(0, 0, 0, 0.04));
+  border-color: var(--dcc-arrow-color, #000000);
 }
 
-/* ===== RIGHT: scrollable carousel ===== */
+/* ===== Right column – carousel ===== */
 .dcc-right {
   min-width: 0;
   overflow: hidden;
-}
-
-.dcc-separator {
-  border-top: 1px solid #e5e5e5;
-  margin-top: 2.4rem;
 }
 
 .dcc-track {
@@ -92,6 +90,7 @@
   display: none;
 }
 
+/* Cards */
 .dcc-card {
   position: relative;
   flex: 0 0 auto;
@@ -133,12 +132,25 @@
   position: absolute;
   left: 1.6rem;
   bottom: 1.6rem;
-  color: #fff;
+  color: var(--dcc-card-title-color, #ffffff);
   font-family: var(--font-heading-family);
   font-size: 2rem;
   z-index: 1;
+  margin: 0;
 }
 
 .dcc-card--placeholder {
   background: var(--color-background-secondary, #f0f0f0);
+}
+
+/* ===== Mobile ===== */
+@media screen and (max-width: 749px) {
+  .dcc-heading {
+    font-size: 2rem;
+  }
+
+  .dcc-card {
+    width: 70vw;
+    max-width: 26rem;
+  }
 }
