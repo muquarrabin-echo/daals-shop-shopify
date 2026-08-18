@@ -506,6 +506,50 @@
         "marquee_label": "As Seen in:",
         "marquee_speed": 30
       }
+    },
+    "feature_highlights_R7mK2p": {
+      "type": "feature-highlights",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "svg": "",
+            "heading": "Delivered by daals",
+            "text": "Free Standard Delivery on orders over £99"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "svg": "",
+            "heading": "Flexible payment options",
+            "text": "Pay in 3 or 4 interest-free instalments with Klarna or Clearpay"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "svg": "",
+            "heading": "New Arrivals",
+            "text": "New styles added regularly. Check our latest exclusive designs"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ],
+      "settings": {
+        "columns_desktop": 3,
+        "column_gap": 40,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "text_color": "#4a4a4a",
+        "icon_background": "#f5f0eb"
+      }
     }
   },
   "order": [
@@ -516,6 +560,7 @@
     "collection_carousel_Fr2sTm",
     "collection_carousel_Qw8vBn",
     "description_collection_carousel_Xz5hPq",
-    "reviews_marquee_Kd7nWs"
+    "reviews_marquee_Kd7nWs",
+    "feature_highlights_R7mK2p"
   ]
 }
