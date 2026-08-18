@@ -142,31 +142,11 @@
             "button_label": "Shop now",
             "bg_color": "#5c4033"
           }
-        },
-        "banner_2": {
-          "type": "banner",
-          "settings": {
-            "collection": "",
-            "subtitle": "Short supporting text goes here.",
-            "button_label": "Shop now",
-            "bg_color": "#5c4033"
-          }
-        },
-        "banner_3": {
-          "type": "banner",
-          "settings": {
-            "collection": "",
-            "subtitle": "Short supporting text goes here.",
-            "button_label": "Shop now",
-            "bg_color": "#5c4033"
-          }
         }
       },
       "block_order": [
         "banner_1",
-        "banner_kV4k7w",
-        "banner_2",
-        "banner_3"
+        "banner_kV4k7w"
       ],
       "settings": {
         "padding_top": 40,
