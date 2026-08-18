@@ -1,46 +1,14 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --hp-bg: {{ section.settings.background_color }};
+  }
+</style>
+
+{{ 'section-header-promos.css' | asset_url | stylesheet_tag }}
+
 <div class="header-promos" data-header-promos>
   {% content_for 'blocks' %}
 </div>
-
-{% stylesheet %}
-  .header-promos {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: #354E5A;
-    padding: 10px 20px;
-  }
-
-  @media screen and (max-width: 749px) {
-    .header-promos {
-      position: relative;
-      display: block;
-      padding: 8px 0;
-      height: 40px;
-      overflow: hidden;
-    }
-
-    .header-promos > * {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1.2s ease-in-out;
-    }
-
-    .header-promos > *.is-active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-  }
-{% endstylesheet %}
 
 {% javascript %}
   (function () {
