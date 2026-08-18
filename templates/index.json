@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_jVaWmY": {
@@ -7,7 +16,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
+            "text": "<p>The Season of Possibility</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -29,17 +38,44 @@
           },
           "blocks": {}
         },
+        "text_kJJ7pR": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>The mosaic of outdoor living awaits beyond the garden door.<br/>                    </p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "button_H9gpTf": {
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Shop all",
+            "label": "Explore what's possible",
             "link": "shopify://collections/all",
             "open_in_new_tab": false,
             "style_class": "button-custom",
-            "custom_button_background": "rgba(0, 0, 0, 0)",
+            "custom_button_background": "rgba(0,0,0,0)",
             "custom_button_text": "{{ settings.color_palette.background }}",
             "custom_button_border": "{{ settings.color_palette.background }}",
+            "link_text_color": "",
             "width": "fit-content",
             "custom_width": 100,
             "width_mobile": "fit-content",
@@ -50,12 +86,18 @@
       },
       "block_order": [
         "text_YLPk4p",
+        "text_kJJ7pR",
         "button_H9gpTf"
       ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
+        "image_1": "shopify://shop_images/Season_Of_Possibility_HP_2.webp",
         "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",
@@ -69,6 +111,7 @@
         "section_width": "page-width",
         "section_height": "medium",
         "section_height_custom": 50,
+        "background_color": "",
         "toggle_overlay": true,
         "overlay_color": "#12121266",
         "overlay_style": "solid",
@@ -83,6 +126,15 @@
       "type": "collection-banner-grid",
       "blocks": {
         "banner_1": {
+          "type": "banner",
+          "settings": {
+            "collection": "",
+            "subtitle": "Short supporting text goes here.",
+            "button_label": "Shop now",
+            "bg_color": "#5c4033"
+          }
+        },
+        "banner_kV4k7w": {
           "type": "banner",
           "settings": {
             "collection": "",
@@ -112,6 +164,7 @@
       },
       "block_order": [
         "banner_1",
+        "banner_kV4k7w",
         "banner_2",
         "banner_3"
       ],
@@ -161,6 +214,7 @@
       "settings": {
         "heading": "Our Garden Collections",
         "heading_color": "#000000",
+        "background_color": "#ffffff",
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -172,7 +226,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "",
             "label": ""
           }
         },
@@ -180,7 +233,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "",
             "label": ""
           }
         },
@@ -188,7 +240,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "",
             "label": ""
           }
         },
@@ -196,7 +247,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "",
             "label": ""
           }
         }
@@ -211,7 +261,6 @@
       "settings": {
         "heading": "Featured Collection",
         "featured_product": "",
-        "featured_image": "",
         "featured_link": "",
         "featured_label": "Featured Product",
         "featured_sublabel": "",
@@ -349,7 +398,6 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
-            "image": "",
             "label": "",
             "fallback_title": "Collection"
           }
@@ -358,7 +406,6 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
-            "image": "",
             "label": "",
             "fallback_title": "Collection"
           }
@@ -367,7 +414,6 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
-            "image": "",
             "label": "",
             "fallback_title": "Collection"
           }
@@ -376,7 +422,6 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
-            "image": "",
             "label": "",
             "fallback_title": "Collection"
           }
@@ -406,7 +451,6 @@
         "review_1": {
           "type": "review",
           "settings": {
-            "image": "",
             "rating": 5,
             "title": "Amazing quality!",
             "quote": "The quality is amazing - my order looks brilliant and the delivery men were lovely and friendly. It was simple and easy to put together. Thanks daals, will definitely be ordering from you again.",
@@ -416,7 +460,6 @@
         "review_2": {
           "type": "review",
           "settings": {
-            "image": "",
             "rating": 5,
             "title": "Perfect blend of style and function!",
             "quote": "Quick delivery, easy to set up, and exactly as described. The finish is beautiful, the build is sturdy, and it's wonderfully comfortable. A perfect blend of style and function.",
@@ -426,7 +469,6 @@
         "review_3": {
           "type": "review",
           "settings": {
-            "image": "",
             "rating": 5,
             "title": "Friendly & responsive team!",
             "quote": "Outstanding quality! My purchase was soft, durable, and true to the photos. The colours add warmth and character, clearly crafted with care. Service was equally impressive, friendly, responsive and above-and-beyond.",
@@ -436,49 +478,42 @@
         "logo_1": {
           "type": "logo",
           "settings": {
-            "image": "",
             "text": "theguardian"
           }
         },
         "logo_2": {
           "type": "logo",
           "settings": {
-            "image": "",
             "text": "DECOR"
           }
         },
         "logo_3": {
           "type": "logo",
           "settings": {
-            "image": "",
             "text": "THE TIMES"
           }
         },
         "logo_4": {
           "type": "logo",
           "settings": {
-            "image": "",
             "text": "ITV"
           }
         },
         "logo_5": {
           "type": "logo",
           "settings": {
-            "image": "",
             "text": "COSMOPOLITAN"
           }
         },
         "logo_6": {
           "type": "logo",
           "settings": {
-            "image": "",
             "text": "Ideal Home"
           }
         },
         "logo_7": {
           "type": "logo",
           "settings": {
-            "image": "",
             "text": "apartment therapy"
           }
         }
@@ -497,7 +532,7 @@
       ],
       "name": "t:names.reviews_marquee",
       "settings": {
-        "background_image": "",
+        "background_image": "shopify://shop_images/Reviews.webp",
         "fallback_background_color": "#2b2118",
         "heading": "Don't just take our word",
         "rating_prefix": "Rated",
@@ -554,7 +589,6 @@
     "image_with_text_split_left_T4nP8q": {
       "type": "image-with-text-split",
       "settings": {
-        "image": "",
         "image_position": "left",
         "heading": "The Art of Choosing Well.",
         "text": "<p>At daals, we select and design furniture with intention. From concept and material selection to final finish and delivery, every piece is shaped by balance, function, and lasting appeal. Crafted globally and managed end to end, our collections are created to work together, helping you build a home that feels considered, not complicated.</p>",
@@ -580,10 +614,10 @@
         "heading_color": "#1a1a1a",
         "text_color": "#4a4a4a",
         "legal_color": "#6b6b6b",
-        "separator_color": "#000000",
         "padding_top": 80,
         "padding_bottom": 80,
-        "show_separator": true
+        "show_separator": true,
+        "separator_color": "#000000"
       }
     },
     "description_collection_carousel_Y7hR3s": {
@@ -593,7 +627,6 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
-            "image": "",
             "label": "",
             "fallback_title": "Collection"
           }
@@ -602,7 +635,6 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
-            "image": "",
             "label": "",
             "fallback_title": "Collection"
           }
@@ -611,7 +643,6 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
-            "image": "",
             "label": "",
             "fallback_title": "Collection"
           }
@@ -620,7 +651,6 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
-            "image": "",
             "label": "",
             "fallback_title": "Collection"
           }
@@ -646,7 +676,6 @@
     "image_with_text_split_right_K8vN4m": {
       "type": "image-with-text-split",
       "settings": {
-        "image": "",
         "image_position": "right",
         "heading": "The Art of Choosing Well.",
         "text": "<p>At daals, we select and design furniture with intention. From concept and material selection to final finish and delivery, every piece is shaped by balance, function, and lasting appeal. Crafted globally and managed end to end, our collections are created to work together, helping you build a home that feels considered, not complicated.</p>",
