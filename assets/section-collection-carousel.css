@@ -1,6 +1,6 @@
 .carousel-section {
-  padding-top: var(--padding-top, 40px);
-  padding-bottom: var(--padding-bottom, 40px);
+  padding-top: var(--carousel-padding-top, 40px);
+  padding-bottom: var(--carousel-padding-bottom, 40px);
 }
 
 .carousel-section__header {
@@ -13,6 +13,7 @@
 .carousel-section__heading {
   font-size: 1.5rem;
   margin: 0;
+  color: var(--carousel-heading-color, #000000);
 }
 
 .carousel-section__nav {
@@ -33,11 +34,17 @@
   align-items: center;
   justify-content: center;
   color: #333;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, opacity 0.2s ease;
 }
 
-.carousel-arrow:hover {
+.carousel-arrow:hover:not(:disabled) {
   background: #f2f2f2;
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
 }
 
 .carousel-track {
@@ -51,6 +58,15 @@
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
+  padding-left: var(--carousel-edge-inset, 1.5rem);
+  padding-right: var(--carousel-edge-inset, 1.5rem);
+  justify-content: flex-start;
+}
+
+/* Applied via JS when the cards don't fill the viewport, so a
+   handful of cards look intentionally centered instead of stuck
+   to the left with dead space on the right. */
+.carousel-track.is-not-overflowing {
   justify-content: center;
 }
 
