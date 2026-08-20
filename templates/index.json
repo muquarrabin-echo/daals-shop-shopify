@@ -170,21 +170,35 @@
         "collection_card_2": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "oakham",
             "fallback_title": "Collection"
           }
         },
         "collection_card_3": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "maru",
             "fallback_title": "Collection"
           }
         },
         "collection_card_4": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "izzy",
+            "fallback_title": "Collection"
+          }
+        },
+        "collection_card_eKf3GB": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "frances",
+            "fallback_title": "Collection"
+          }
+        },
+        "collection_card_zw37nR": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "thalia",
             "fallback_title": "Collection"
           }
         }
@@ -193,7 +207,9 @@
         "collection_card_1",
         "collection_card_2",
         "collection_card_3",
-        "collection_card_4"
+        "collection_card_4",
+        "collection_card_eKf3GB",
+        "collection_card_zw37nR"
       ],
       "settings": {
         "carousel_type": "collections",
