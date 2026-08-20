@@ -4,10 +4,20 @@
   <div class="banner-grid__inner page-width">
     {% for block in section.blocks %}
       {% assign collection = block.settings.collection %}
+      {% assign custom_image = block.settings.image %}
+      {% assign title = block.settings.title | default: collection.title %}
+
       <div class="banner-grid__item" {{ block.shopify_attributes }}>
         <a href="{{ collection.url | default: '#' }}" class="banner-grid__link">
           <div class="banner-grid__image-wrap">
-            {% if collection.featured_image %}
+            {% if custom_image != blank %}
+              {{ custom_image | image_url: width: 1200 | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 750px) 33vw, 100vw',
+                widths: '400,600,800,1000,1200',
+                class: 'banner-grid__image'
+              }}
+            {% elsif collection.featured_image %}
               {{ collection.featured_image | image_url: width: 1200 | image_tag:
                 loading: 'lazy',
                 sizes: '(min-width: 750px) 33vw, 100vw',
@@ -19,8 +29,8 @@
             {% endif %}
           </div>
           <div class="banner-grid__caption" style="background-color: {{ block.settings.bg_color }};">
-            {% if collection.title != blank %}
-              <h3 class="banner-grid__title">{{ collection.title }}</h3>
+            {% if title != blank %}
+              <h3 class="banner-grid__title">{{ title }}</h3>
             {% endif %}
             {% if block.settings.subtitle != blank %}
               <p class="banner-grid__subtitle">{{ block.settings.subtitle }}</p>
@@ -67,10 +77,41 @@
       "type": "banner",
       "name": "Collection Banner",
       "settings": [
-        { "type": "collection", "id": "collection", "label": "Collection" },
-        { "type": "text", "id": "subtitle", "label": "Description", "default": "Short supporting text goes here." },
-        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
-        { "type": "color", "id": "bg_color", "label": "Caption background color", "default": "#5c4033" }
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom image",
+          "info": "Optional. Overrides the collection featured image."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "info": "Leave blank to use the collection title."
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Description",
+          "default": "Short supporting text goes here."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop now"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Caption background color",
+          "default": "#5c4033"
+        }
       ]
     }
   ],
