@@ -91,11 +91,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, opacity 0.2s ease;
 }
 
-.rvm-arrow:hover {
+.rvm-arrow:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.2);
+}
+
+.rvm-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
 }
 
 /* ===== Review cards ===== */
@@ -117,6 +123,14 @@
   scroll-snap-type: x proximity;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  justify-content: flex-start;
+}
+
+/* Applied via JS when the cards don't fill the available width, so a
+   handful of reviews look intentionally centered instead of stuck to
+   the left with dead space on the right. */
+.rvm-track.is-not-overflowing {
+  justify-content: center;
 }
 
 .rvm-track::-webkit-scrollbar {

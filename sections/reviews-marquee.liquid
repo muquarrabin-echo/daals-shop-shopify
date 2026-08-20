@@ -1,4 +1,5 @@
 {{ 'section-reviews-marquee.css' | asset_url | stylesheet_tag }}
+{{ 'section-reviews-marquee.js' | asset_url | script_tag }}
 
 <style>
   #shopify-section-{{ section.id }} {
@@ -40,7 +41,7 @@
     </div>
 
     <div class="rvm-nav">
-      <button type="button" class="rvm-arrow rvm-arrow--prev" aria-label="Previous">&#8249;</button>
+      <button type="button" class="rvm-arrow rvm-arrow--prev" aria-label="Previous" disabled>&#8249;</button>
       <button type="button" class="rvm-arrow rvm-arrow--next" aria-label="Next">&#8250;</button>
     </div>
   </div>
@@ -159,33 +160,6 @@
     </div>
   {%- endif -%}
 </div>
-
-<script>
-  (function () {
-    var root = document.getElementById('rvm-{{ section.id }}');
-    if (!root) return;
-
-    var track = root.querySelector('.rvm-track');
-    var prev = root.querySelector('.rvm-arrow--prev');
-    var next = root.querySelector('.rvm-arrow--next');
-
-    var scrollAmount = function () {
-      var card = track.querySelector('.rvm-card');
-      return card ? card.offsetWidth + 24 : 320;
-    };
-
-    if (prev) {
-      prev.addEventListener('click', function () {
-        track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
-      });
-    }
-    if (next) {
-      next.addEventListener('click', function () {
-        track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
-      });
-    }
-  })();
-</script>
 
 {% schema %}
 {
