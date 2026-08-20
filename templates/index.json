@@ -154,7 +154,7 @@
       }
     },
     "collection_carousel_K9x2Lp": {
-      "type": "collection-carousel",
+      "type": "custom-carousel",
       "blocks": {
         "collection_card_1": {
           "type": "collection_card",
@@ -255,7 +255,7 @@
       }
     },
     "collection_carousel_Fr2sTm": {
-      "type": "collection-carousel",
+      "type": "custom-carousel",
       "blocks": {
         "collection_card_1": {
           "type": "collection_card",
@@ -317,7 +317,7 @@
       }
     },
     "collection_carousel_Qw8vBn": {
-      "type": "collection-carousel",
+      "type": "custom-carousel",
       "blocks": {
         "collection_card_1": {
           "type": "collection_card",

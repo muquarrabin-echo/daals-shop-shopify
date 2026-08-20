@@ -14,8 +14,6 @@
     var maxScroll = track.scrollWidth - track.clientWidth;
     var hasOverflow = maxScroll > 2;
 
-    // Few cards: nothing to scroll, so center them and disable both arrows
-    // instead of leaving them left-aligned with dead space and inert buttons.
     track.classList.toggle('is-not-overflowing', !hasOverflow);
 
     if (!hasOverflow) {
@@ -24,7 +22,6 @@
       return;
     }
 
-    // small tolerance for sub-pixel rounding
     var atStart = track.scrollLeft <= 2;
     var atEnd = track.scrollLeft >= maxScroll - 2;
 
@@ -57,7 +54,6 @@
       updateArrows(track, prev, next);
     });
 
-    // Initial state
     updateEdgeInset(root, track);
     updateArrows(track, prev, next);
 
@@ -74,7 +70,6 @@
     initAll(document);
   });
 
-  // Re-init when a section is added/re-rendered in the theme editor
   document.addEventListener('shopify:section:load', function (event) {
     initAll(event.target);
   });

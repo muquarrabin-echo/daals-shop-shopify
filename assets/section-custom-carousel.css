@@ -63,9 +63,6 @@
   justify-content: flex-start;
 }
 
-/* Applied via JS when the cards don't fill the viewport, so a
-   handful of cards look intentionally centered instead of stuck
-   to the left with dead space on the right. */
 .carousel-track.is-not-overflowing {
   justify-content: center;
 }
@@ -74,22 +71,32 @@
   display: none;
 }
 
+/* ========== Shared card base ========== */
 .carousel-card {
   position: relative;
   flex: 0 0 auto;
-  width: 280px;
-  aspect-ratio: 3 / 4;
   scroll-snap-align: start;
   overflow: hidden;
 }
 
+.carousel-card:first-child {
+  padding-left: 1rem;
+}
+
+
+/* ========== Collection cards (overlay style) ========== */
+.carousel-card--collection {
+  width: 280px;
+  aspect-ratio: 3 / 4;
+}
+
 @media screen and (max-width: 749px) {
-  .carousel-card {
+  .carousel-card--collection {
     width: 68vw;
   }
 }
 
-.carousel-card__link {
+.carousel-card--collection .carousel-card__link {
   position: relative;
   display: block;
   width: 100%;
@@ -97,8 +104,8 @@
   text-decoration: none;
 }
 
-.carousel-card__image,
-.carousel-card .placeholder {
+.carousel-card--collection .carousel-card__image,
+.carousel-card--collection .placeholder {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -106,22 +113,77 @@
   transition: transform 0.6s ease;
 }
 
-.carousel-card__link:hover .carousel-card__image {
+.carousel-card--collection .carousel-card__link:hover .carousel-card__image {
   transform: scale(1.05);
 }
 
-.carousel-card__overlay {
+.carousel-card--collection .carousel-card__overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 45%);
   pointer-events: none;
 }
 
-.carousel-card__title {
+.carousel-card--collection .carousel-card__title {
   position: absolute;
   left: 1rem;
   bottom: 1rem;
   color: #fff;
   font-size: 1.25rem;
   letter-spacing: 0.02em;
+}
+
+/* ========== Product cards (image + text below) ========== */
+.carousel-card--product {
+  width: 280px;
+}
+
+@media screen and (max-width: 749px) {
+  .carousel-card--product {
+    width: 68vw;
+  }
+}
+
+.carousel-card--product .carousel-card__link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.carousel-card--product .carousel-card__image,
+.carousel-card--product .placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1.15;          /* slightly taller than square – matches your screenshot */
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.carousel-card--product .carousel-card__link:hover .carousel-card__image {
+  transform: scale(1.03);
+}
+
+.carousel-card--product .carousel-card__info {
+  padding: 0.85rem 0 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.carousel-card--product .carousel-card__title {
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: #1a1a1a;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.carousel-card--product .carousel-card__price {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1a1a;
 }
