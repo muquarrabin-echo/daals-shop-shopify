@@ -128,7 +128,7 @@
         "banner_1": {
           "type": "banner",
           "settings": {
-            "collection": "",
+            "collection": "new-outdoor-furnitures",
             "subtitle": "Short supporting text goes here.",
             "button_label": "Shop now",
             "bg_color": "#5c4033"
@@ -192,6 +192,7 @@
         "collection_card_4"
       ],
       "settings": {
+        "carousel_type": "collections",
         "heading": "Our Garden Collections",
         "heading_color": "#000000",
         "background_color": "#ffffff",
@@ -309,6 +310,7 @@
         "collection_card_6"
       ],
       "settings": {
+        "carousel_type": "collections",
         "heading": "Finish the Room",
         "heading_color": "#000000",
         "background_color": "#f2ede3",
@@ -371,6 +373,7 @@
         "collection_card_6"
       ],
       "settings": {
+        "carousel_type": "collections",
         "heading": "The Core Collections",
         "heading_color": "#000000",
         "background_color": "#ffffff",
