@@ -201,6 +201,13 @@
             "collection": "thalia",
             "fallback_title": "Collection"
           }
+        },
+        "collection_card_gHGEta": {
+          "type": "collection_card",
+          "settings": {
+            "collection": "richmond",
+            "fallback_title": "Collection"
+          }
         }
       },
       "block_order": [
@@ -209,7 +216,8 @@
         "collection_card_3",
         "collection_card_4",
         "collection_card_eKf3GB",
-        "collection_card_zw37nR"
+        "collection_card_zw37nR",
+        "collection_card_gHGEta"
       ],
       "settings": {
         "carousel_type": "collections",
