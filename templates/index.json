@@ -129,7 +129,9 @@
           "type": "banner",
           "settings": {
             "collection": "new-outdoor-furnitures",
-            "subtitle": "Short supporting text goes here.",
+            "image": "shopify://shop_images/OD-DINE-2256-NAT-SET_main710_400.jpg",
+            "title": "",
+            "subtitle": "Browse our latest exclusive designs. Limited availability.",
             "button_label": "Shop now",
             "bg_color": "#5c4033"
           }
@@ -138,6 +140,7 @@
           "type": "banner",
           "settings": {
             "collection": "",
+            "title": "",
             "subtitle": "Short supporting text goes here.",
             "button_label": "Shop now",
             "bg_color": "#5c4033"
