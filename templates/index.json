@@ -133,17 +133,18 @@
             "title": "",
             "subtitle": "Browse our latest exclusive designs. Limited availability.",
             "button_label": "Shop now",
-            "bg_color": "#5c4033"
+            "bg_color": "#6E473F"
           }
         },
         "banner_kV4k7w": {
           "type": "banner",
           "settings": {
-            "collection": "",
+            "collection": "new-bed-arrivals",
+            "image": "shopify://shop_images/ZX-130-COCO-CHEN_scene1_710_400.jpg",
             "title": "",
-            "subtitle": "Short supporting text goes here.",
+            "subtitle": "Statement luxury, reimagined.",
             "button_label": "Shop now",
-            "bg_color": "#5c4033"
+            "bg_color": "#6E473F"
           }
         }
       },
