@@ -163,7 +163,7 @@
         "collection_card_1": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "chantilly",
             "fallback_title": "Collection"
           }
         },
