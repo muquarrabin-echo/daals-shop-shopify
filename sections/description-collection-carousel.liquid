@@ -1,4 +1,5 @@
 {{ 'section-description-collection-carousel.css' | asset_url | stylesheet_tag }}
+{{ 'section-description-collection-carousel.js' | asset_url | script_tag }}
 
 <style>
   #shopify-section-{{ section.id }} {
@@ -36,7 +37,7 @@
     {%- endif -%}
 
     <div class="dcc-nav">
-      <button type="button" class="dcc-arrow dcc-arrow--prev" aria-label="Previous">&#8249;</button>
+      <button type="button" class="dcc-arrow dcc-arrow--prev" aria-label="Previous" disabled>&#8249;</button>
       <button type="button" class="dcc-arrow dcc-arrow--next" aria-label="Next">&#8250;</button>
     </div>
   </div>
@@ -94,33 +95,6 @@
     </ul>
   </div>
 </div>
-
-<script>
-  (function () {
-    var root = document.getElementById('dcc-{{ section.id }}');
-    if (!root) return;
-
-    var track = root.querySelector('.dcc-track');
-    var prev = root.querySelector('.dcc-arrow--prev');
-    var next = root.querySelector('.dcc-arrow--next');
-
-    var scrollAmount = function () {
-      var card = track.querySelector('.dcc-card');
-      return card ? card.offsetWidth + 16 : 300;
-    };
-
-    if (prev) {
-      prev.addEventListener('click', function () {
-        track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
-      });
-    }
-    if (next) {
-      next.addEventListener('click', function () {
-        track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
-      });
-    }
-  })();
-</script>
 
 {% schema %}
 {
