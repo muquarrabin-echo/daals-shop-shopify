@@ -87,9 +87,9 @@
 {% capture contact_info %}
   {% if show_contact_info and phone_number != blank %}
     <div class="header-actions__contact-info mobile:hidden">
-      <a href="tel:{{ phone_number | replace: ' ', '' }}" class="header-actions__contact-phone">
+      <span class="header-actions__contact-phone">
         {{ phone_number }}
-      </a>
+      </span>
       {% if phone_timing != blank %}
         <span class="header-actions__contact-timing">
           {{ phone_timing }}
@@ -109,9 +109,10 @@
 
   {% if show_wishlist %}
     
+    <a
       href="{{ wishlist_url | default: '#' }}"
       class="header-actions__action wishlist-button"
-      aria-label="{{ 'accessibility.wishlist' | t | default: 'Wishlist' }}"
+      aria-label="Wishlist"
       data-testid="wishlist-button"
     >
       <span class="svg-wrapper" aria-hidden="true">
@@ -402,10 +403,6 @@
     font-size: var(--header-actions-font-size, 0.9rem);
     color: var(--color-foreground);
     text-decoration: none;
-  }
-
-  .header-actions__contact-phone:hover {
-    text-decoration: underline;
   }
 
   .header-actions__contact-timing {
