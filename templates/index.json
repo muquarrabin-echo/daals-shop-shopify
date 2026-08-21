@@ -359,6 +359,20 @@
             "product": "ophelia-taupe-boucle-dining-chair",
             "fallback_title": "Product"
           }
+        },
+        "product_card_BUQiHd": {
+          "type": "product_card",
+          "settings": {
+            "product": "arley-set-of-2-beech-wood-dining-chairs-natural-and-beige",
+            "fallback_title": "Product"
+          }
+        },
+        "product_card_yCzaMg": {
+          "type": "product_card",
+          "settings": {
+            "product": "arley-set-of-2-beech-wood-dining-chairs-natural-and-beige",
+            "fallback_title": "Product"
+          }
         }
       },
       "block_order": [
@@ -367,7 +381,9 @@
         "product_card_tcKXxp",
         "product_card_MpBXHH",
         "product_card_fW7CjP",
-        "product_card_KdBAcH"
+        "product_card_KdBAcH",
+        "product_card_BUQiHd",
+        "product_card_yCzaMg"
       ],
       "settings": {
         "carousel_type": "products",
