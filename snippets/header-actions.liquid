@@ -7,6 +7,12 @@
   @param {block} [block] - The block object, used for Shopify editor attributes.
   @param {string} [display_style] - Controls display mode for header actions: 'icon' or 'text'.
   @param {string} [customer_account_menu] - The menu handle passed to the shopify-account component.
+  @param {string} [cart_text] - Optional text label shown next to the cart icon (e.g. "Basket").
+  @param {boolean} [show_wishlist] - Whether to show the wishlist icon button.
+  @param {string} [wishlist_url] - URL the wishlist button links to.
+  @param {boolean} [show_contact_info] - Whether to show the phone number / hours block.
+  @param {string} [phone_number] - Phone number displayed in the header.
+  @param {string} [phone_timing] - Store hours / availability text shown under the phone number.
 
   @example
   {% render 'header-actions', section: section %}
@@ -20,18 +26,21 @@
 
 {% capture cart_icon %}
   <cart-icon
-    class="header-actions__cart-icon{% if display_style == 'text' %} header-actions__cart-icon--text{% endif %}{% unless cart == empty %} header-actions__cart-icon--has-cart{% endunless %}"
+    class="header-actions__cart-icon{% if display_style == 'text' or cart_text != blank %} header-actions__cart-icon--text{% endif %}{% unless cart == empty %} header-actions__cart-icon--has-cart{% endunless %}"
     data-testid="cart-icon"
   >
-    <span class="{% if display_style == 'icon' %}hidden{% else %}mobile:hidden{% endif %}">
-      {{ 'content.cart_title' | t }}
-    </span>
-
     <span
       class="svg-wrapper {% if display_style != 'icon' %}desktop:hidden{% endif %}"
       aria-hidden="true"
     >
       {{ 'icon-cart.svg' | inline_asset_content }}
+    </span>
+    <span class="{% if display_style == 'icon' and cart_text == blank %}hidden{% else %}mobile:hidden{% endif %}">
+      {%- if cart_text != blank -%}
+        {{ cart_text }}
+      {%- else -%}
+        {{ 'content.cart_title' | t }}
+      {%- endif -%}
     </span>
 
     {% render 'cart-bubble', limit: 100 %}
@@ -57,12 +66,60 @@
   </svg>
 {% endcapture %}
 
+{% capture wishlist_icon %}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="17"
+    height="17"
+    viewBox="0 0 17 17"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      stroke="currentColor"
+      stroke-linejoin="round"
+      stroke-width="var(--icon-stroke-width)"
+      d="M8.5 14.5S2 10.66 2 6.32C2 4.09 3.68 2.3 5.85 2.3c1.18 0 2.3.55 3 1.44.7-.89 1.82-1.44 3-1.44C14.32 2.3 16 4.09 16 6.32c0 4.34-6.5 8.18-6.5 8.18h-1Z"
+    />
+  </svg>
+{% endcapture %}
+
+{% capture contact_info %}
+  {% if show_contact_info and phone_number != blank %}
+    <div class="header-actions__contact-info mobile:hidden">
+      <a href="tel:{{ phone_number | replace: ' ', '' }}" class="header-actions__contact-phone">
+        {{ phone_number }}
+      </a>
+      {% if phone_timing != blank %}
+        <span class="header-actions__contact-timing">
+          {{ phone_timing }}
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endcapture %}
+
 <header-actions
   {% if display_style == 'text' %}
     class="header-actions--text"
   {% endif %}
   {{- block.shopify_attributes -}}
 >
+  {{ contact_info }}
+
+  {% if show_wishlist %}
+    
+      href="{{ wishlist_url | default: '#' }}"
+      class="header-actions__action wishlist-button"
+      aria-label="{{ 'accessibility.wishlist' | t | default: 'Wishlist' }}"
+      data-testid="wishlist-button"
+    >
+      <span class="svg-wrapper" aria-hidden="true">
+        {{ wishlist_icon }}
+      </span>
+    </a>
+  {% endif %}
+
   {% if shop.customer_accounts_enabled %}
     {% liquid
       assign account_actions_style = ''
@@ -127,7 +184,7 @@
       {{ cart_icon }}
     </button>
   {% else %}
-    <a
+    
       href="{{ routes.cart_url }}"
       class="header-actions__action action__cart{% if display_style == 'text' %} header-actions__text-style{% endif %}"
       aria-label="{{ 'accessibility.cart' | t }}"
@@ -330,4 +387,39 @@
       margin-inline-start: 0;
     }
   }
+
+  .header-actions__contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.25;
+    margin-inline-end: var(--gap-md);
+    text-align: right;
+  }
+
+  .header-actions__contact-phone {
+    font-weight: 600;
+    font-size: var(--header-actions-font-size, 0.9rem);
+    color: var(--color-foreground);
+    text-decoration: none;
+  }
+
+  .header-actions__contact-phone:hover {
+    text-decoration: underline;
+  }
+
+  .header-actions__contact-timing {
+    font-size: 0.75rem;
+  }
+
+  .wishlist-button .svg-wrapper {
+    height: var(--button-size);
+    width: var(--button-size);
+  }
+
+  .wishlist-button svg {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+  }
+  
 {% endstylesheet %}

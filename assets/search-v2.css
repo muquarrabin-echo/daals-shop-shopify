@@ -180,6 +180,68 @@ predictive-search,
   color: #000000 !important;
 }
 
+/* Make cart / account TEXT black when the transparent header turns white */
+/* Make cart / account / contact TEXT black when the transparent header turns white */
+.header-wrapper--transparent:hover .header-actions__action,
+.header-wrapper--transparent:focus-within .header-actions__action,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .header-actions__action,
+.header-wrapper--transparent[data-sticky-state="active"] .header-actions__action,
+[transparent]:hover .header-actions__action,
+[transparent]:focus-within .header-actions__action,
+[transparent]:has(.predictive-search-results.is-open) .header-actions__action,
+[transparent][data-sticky-state="active"] .header-actions__action,
+[data-sticky-state="active"] .header-actions__action,
+.header-wrapper--transparent:hover .header-actions__text-style,
+.header-wrapper--transparent:focus-within .header-actions__text-style,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .header-actions__text-style,
+.header-wrapper--transparent[data-sticky-state="active"] .header-actions__text-style,
+[transparent]:hover .header-actions__text-style,
+[transparent]:focus-within .header-actions__text-style,
+[transparent]:has(.predictive-search-results.is-open) .header-actions__text-style,
+[transparent][data-sticky-state="active"] .header-actions__text-style,
+[data-sticky-state="active"] .header-actions__text-style,
+.header-wrapper--transparent:hover .account-button__text,
+.header-wrapper--transparent:focus-within .account-button__text,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .account-button__text,
+.header-wrapper--transparent[data-sticky-state="active"] .account-button__text,
+[transparent]:hover .account-button__text,
+[transparent]:focus-within .account-button__text,
+[transparent]:has(.predictive-search-results.is-open) .account-button__text,
+[transparent][data-sticky-state="active"] .account-button__text,
+[data-sticky-state="active"] .account-button__text,
+.header-wrapper--transparent:hover cart-icon,
+.header-wrapper--transparent:focus-within cart-icon,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) cart-icon,
+.header-wrapper--transparent[data-sticky-state="active"] cart-icon,
+[transparent]:hover cart-icon,
+[transparent]:focus-within cart-icon,
+[transparent]:has(.predictive-search-results.is-open) cart-icon,
+[transparent][data-sticky-state="active"] cart-icon,
+[data-sticky-state="active"] cart-icon,
+.header-wrapper--transparent:hover .header-actions__contact-phone,
+.header-wrapper--transparent:focus-within .header-actions__contact-phone,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .header-actions__contact-phone,
+.header-wrapper--transparent[data-sticky-state="active"] .header-actions__contact-phone,
+[transparent]:hover .header-actions__contact-phone,
+[transparent]:focus-within .header-actions__contact-phone,
+[transparent]:has(.predictive-search-results.is-open) .header-actions__contact-phone,
+[transparent][data-sticky-state="active"] .header-actions__contact-phone,
+[data-sticky-state="active"] .header-actions__contact-phone,
+.header-wrapper--transparent:hover .header-actions__contact-timing,
+.header-wrapper--transparent:focus-within .header-actions__contact-timing,
+.header-wrapper--transparent:has(.predictive-search-results.is-open) .header-actions__contact-timing,
+.header-wrapper--transparent[data-sticky-state="active"] .header-actions__contact-timing,
+[transparent]:hover .header-actions__contact-timing,
+[transparent]:focus-within .header-actions__contact-timing,
+[transparent]:has(.predictive-search-results.is-open) .header-actions__contact-timing,
+[transparent][data-sticky-state="active"] .header-actions__contact-timing,
+[data-sticky-state="active"] .header-actions__contact-timing {
+  color: #000000 !important;
+  --button-color: #000000 !important;
+  --color-foreground: #000000 !important;
+  --color-account-icon: #000000 !important;
+}
+
 /* Force Solid White Pill with Dark Text when Hovered, Focused, OR Scrolled (data-sticky-state="active") */
 .header-wrapper--transparent:hover .pill-search,
 .header-wrapper--transparent:focus-within .pill-search,

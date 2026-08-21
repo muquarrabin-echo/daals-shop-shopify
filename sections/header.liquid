@@ -97,7 +97,7 @@
   endcapture
 
   capture actions
-    render 'header-actions', customer_account_menu: section.settings.customer_account_menu, display_style: section.settings.actions_display_style, section: section
+    render 'header-actions', customer_account_menu: section.settings.customer_account_menu, display_style: section.settings.actions_display_style, section: section, cart_text: section.settings.cart_text, show_wishlist: section.settings.show_wishlist, wishlist_url: section.settings.wishlist_url, show_contact_info: section.settings.show_contact_info, phone_number: section.settings.phone_number, phone_timing: section.settings.phone_timing
   endcapture
 
   if shop.customer_accounts_enabled
@@ -1645,6 +1645,48 @@
       "label": "t:settings.bottom_row_text",
       "placeholder": "t:settings.default",
       "visible_if": "{{ section.settings.menu_row == 'bottom' or section.settings.localization_row == 'bottom' or section.settings.search_row == 'bottom' }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_text",
+      "label": "Cart text",
+      "info": "Optional text shown next to the cart icon, e.g. \"Basket\"",
+      "default": "Basket"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show wishlist icon",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "wishlist_url",
+      "label": "Wishlist page link",
+      "visible_if": "{{ section.settings.show_wishlist }}"
+    },
+    {
+      "type": "header",
+      "content": "Contact info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact_info",
+      "label": "Show phone number & hours",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "visible_if": "{{ section.settings.show_contact_info }}"
+    },
+    {
+      "type": "text",
+      "id": "phone_timing",
+      "label": "Availability hours",
+      "info": "e.g. \"8:30am - 5:30pm\"",
+      "visible_if": "{{ section.settings.show_contact_info }}"
     },
     {
       "type": "header",
