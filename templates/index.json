@@ -345,13 +345,29 @@
             "product": "demeter-dining-chair-ecru-boucle-natural-oak-frame",
             "fallback_title": "Product"
           }
+        },
+        "product_card_fW7CjP": {
+          "type": "product_card",
+          "settings": {
+            "product": "dagmar-set-of-2-dining-chairs-ecru-boucle-natural-frame",
+            "fallback_title": "Product"
+          }
+        },
+        "product_card_KdBAcH": {
+          "type": "product_card",
+          "settings": {
+            "product": "ophelia-taupe-boucle-dining-chair",
+            "fallback_title": "Product"
+          }
         }
       },
       "block_order": [
         "product_card_nGdW4J",
         "product_card_Rp4dTm",
         "product_card_tcKXxp",
-        "product_card_MpBXHH"
+        "product_card_MpBXHH",
+        "product_card_fW7CjP",
+        "product_card_KdBAcH"
       ],
       "settings": {
         "carousel_type": "products",
