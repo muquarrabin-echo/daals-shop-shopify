@@ -318,59 +318,43 @@
     "collection_carousel_Fr2sTm": {
       "type": "custom-carousel",
       "blocks": {
-        "collection_card_1": {
-          "type": "collection_card",
+        "product_card_nGdW4J": {
+          "type": "product_card",
           "settings": {
-            "collection": "",
-            "fallback_title": "Collection"
+            "product": "lumi-dining-chair-ecru-boucle-natural-oak-frame",
+            "fallback_title": "Product"
           }
         },
-        "collection_card_2": {
-          "type": "collection_card",
+        "product_card_Rp4dTm": {
+          "type": "product_card",
           "settings": {
-            "collection": "",
-            "fallback_title": "Collection"
+            "product": "lumi-dining-chair-oatmeal-fabric-silver-oak-frame",
+            "fallback_title": "Product"
           }
         },
-        "collection_card_3": {
-          "type": "collection_card",
+        "product_card_tcKXxp": {
+          "type": "product_card",
           "settings": {
-            "collection": "",
-            "fallback_title": "Collection"
+            "product": "arley-set-of-2-beech-wood-dining-chairs-natural-and-light-taupe-striped",
+            "fallback_title": "Product"
           }
         },
-        "collection_card_4": {
-          "type": "collection_card",
+        "product_card_MpBXHH": {
+          "type": "product_card",
           "settings": {
-            "collection": "",
-            "fallback_title": "Collection"
-          }
-        },
-        "collection_card_5": {
-          "type": "collection_card",
-          "settings": {
-            "collection": "",
-            "fallback_title": "Collection"
-          }
-        },
-        "collection_card_6": {
-          "type": "collection_card",
-          "settings": {
-            "collection": "",
-            "fallback_title": "Collection"
+            "product": "demeter-dining-chair-ecru-boucle-natural-oak-frame",
+            "fallback_title": "Product"
           }
         }
       },
       "block_order": [
-        "collection_card_1",
-        "collection_card_2",
-        "collection_card_3",
-        "collection_card_4",
-        "collection_card_5",
-        "collection_card_6"
+        "product_card_nGdW4J",
+        "product_card_Rp4dTm",
+        "product_card_tcKXxp",
+        "product_card_MpBXHH"
       ],
       "settings": {
-        "carousel_type": "collections",
+        "carousel_type": "products",
         "heading": "Finish the Room",
         "heading_color": "#000000",
         "background_color": "#f2ede3",
