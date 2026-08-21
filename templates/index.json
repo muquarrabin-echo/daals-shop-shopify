@@ -133,7 +133,7 @@
             "title": "",
             "subtitle": "Browse our latest exclusive designs. Limited availability.",
             "button_label": "Shop now",
-            "bg_color": "#6E473F"
+            "bg_color": "#6e473f"
           }
         },
         "banner_kV4k7w": {
@@ -144,7 +144,7 @@
             "title": "",
             "subtitle": "Statement luxury, reimagined.",
             "button_label": "Shop now",
-            "bg_color": "#6E473F"
+            "bg_color": "#6e473f"
           }
         }
       },
@@ -234,28 +234,56 @@
         "collection_1": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "sofas",
             "label": ""
           }
         },
         "collection_2": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "accessories-copy",
             "label": ""
           }
         },
         "collection_3": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "beds",
             "label": ""
           }
         },
         "collection_4": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "dining-tables",
+            "label": ""
+          }
+        },
+        "collection_7pBUdM": {
+          "type": "collection",
+          "settings": {
+            "collection": "dining-copy",
+            "label": ""
+          }
+        },
+        "collection_fKVJCj": {
+          "type": "collection",
+          "settings": {
+            "collection": "desks",
+            "label": ""
+          }
+        },
+        "collection_WDTtNH": {
+          "type": "collection",
+          "settings": {
+            "collection": "dining-chairs",
+            "label": ""
+          }
+        },
+        "collection_FEEQex": {
+          "type": "collection",
+          "settings": {
+            "collection": "bedding",
             "label": ""
           }
         }
@@ -264,12 +292,16 @@
         "collection_1",
         "collection_2",
         "collection_3",
-        "collection_4"
+        "collection_4",
+        "collection_7pBUdM",
+        "collection_fKVJCj",
+        "collection_WDTtNH",
+        "collection_FEEQex"
       ],
       "name": "t:names.featured_collection",
       "settings": {
         "heading": "Featured Collection",
-        "featured_product": "",
+        "featured_product": "antoine-side-opening-ottoman-storage-bed-soft-beige-chenille",
         "featured_link": "",
         "featured_label": "Featured Product",
         "featured_sublabel": "",
