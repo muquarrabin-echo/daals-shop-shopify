@@ -49,7 +49,6 @@
 
 .carousel-track {
   display: flex;
-  gap: 1rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   list-style: none;
@@ -77,11 +76,11 @@
   flex: 0 0 auto;
   scroll-snap-align: start;
   overflow: hidden;
+  padding: 0 1rem;
+
 }
 
-.carousel-card:first-child {
-  padding-left: 1rem;
-}
+
 
 
 /* ========== Collection cards (overlay style) ========== */
