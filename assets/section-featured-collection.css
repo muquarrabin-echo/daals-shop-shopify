@@ -76,7 +76,7 @@
 
 .featured-product-sublabel {
   font-family: var(--font-heading-family);
-  font-size: 2rem;
+  font-size: 1rem;
   margin: 0;
   text-decoration: underline;
   text-underline-offset: 0.4rem;
