@@ -350,6 +350,7 @@ predictive-search,
 }
 
 .psr-product-title {
+  color: #222222 !important;
   font-size: 13px;
   line-height: 1.35;
   margin-bottom: 4px;
@@ -360,6 +361,7 @@ predictive-search,
 }
 
 .psr-product-price {
+  color: #222222 !important;
   font-size: 13px;
   font-weight: 600;
 }
